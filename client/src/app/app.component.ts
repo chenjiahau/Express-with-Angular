@@ -17,10 +17,6 @@ export class AppComponent implements OnInit {
     this.greetingList = this.greetingService.list;
   }
 
-  onAddGreeting(greeting: { priority: number, title: string }) {
-    this.greetingList.push(greeting);
-  }
-
   onSayGreeting(greeting: { priority: number, title: string }) {
     console.log('onSayGreeting', greeting);
   }

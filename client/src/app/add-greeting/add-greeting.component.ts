@@ -1,19 +1,21 @@
-import { Component, OnInit, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { GreetingService } from 'src/services/greeting.service';
 
 @Component({
   selector: 'app-add-greeting',
   templateUrl: './add-greeting.component.html',
-  styleUrls: ['./add-greeting.component.css']
+  styleUrls: ['./add-greeting.component.css'],
+  // Set provider will instance again
+  // providers: [GreetingService]
 })
 export class AddGreetingComponent implements OnInit {
-  @Output() addGreeting = new EventEmitter<{ priority: number, title: string }>();
 
-  constructor() { }
+  constructor(private greetingService: GreetingService) { }
 
   ngOnInit(): void {
   }
 
   onAddGreeing(priorityInput, titleInput) {
-    this.addGreeting.emit({priority: parseInt(priorityInput.value), title: titleInput.value});
+    this.greetingService.addGreeting(priorityInput.value, titleInput.value);
   }
 }
