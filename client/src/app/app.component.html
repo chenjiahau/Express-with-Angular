@@ -1,3 +1,22 @@
 <div class="container">
-  <h1>{{title}}</h1>
+  <div class="row">
+    <div class="col-md-12">
+      <app-add-greeting
+        (addGreeting)="onAddGreeting($event)"
+      ></app-add-greeting>
+      <app-greeting
+        *ngFor="let greeting of greetingList"
+        [greetingItem]="greeting"
+        (sayGreeting)="onSayGreeting($event)"
+      >
+        <button
+          font
+          *unless="greeting.priority > 0"
+          [defaultFontSize]="'18px'"
+          class="say-greeing-btn"
+          (click)="onSayGreeting($event)"
+        >{{greeting.title}}</button>
+      </app-greeting>
+    </div>
+  </div>
 </div>

@@ -6,5 +6,16 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  title = 'Angular';
+  greetingList = [
+    { priority: 1, title: "Hi" },
+    { priority: 1, title: "Welcome" },
+  ]
+
+  onAddGreeting(greeting: { priority: number, title: string }) {
+    this.greetingList.push(greeting);
+  }
+
+  onSayGreeting(greeting: { priority: number, title: string }) {
+    console.log('onSayGreeting', greeting);
+  }
 }
