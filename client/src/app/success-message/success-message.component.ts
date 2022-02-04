@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
 import { GreetingService } from 'src/services/greeting.service';
+import { logService } from 'src/services/log.service';
 
 @Component({
   selector: 'app-success-message',
@@ -10,7 +11,7 @@ import { GreetingService } from 'src/services/greeting.service';
 export class SuccessMessageComponent implements OnInit {
   show: boolean = false;
 
-  constructor(private greetingService: GreetingService) {
+  constructor(private greetingService: GreetingService, private logService: logService) {
   }
 
   ngOnInit(): void {
@@ -18,6 +19,7 @@ export class SuccessMessageComponent implements OnInit {
       (result: boolean) => {
         this.show = result;
         setTimeout(() => this.show = false, 3000);
+        console.log(this.logService.log);
       }
     )
   }

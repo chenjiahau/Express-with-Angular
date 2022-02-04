@@ -5,7 +5,6 @@ import { GreetingService } from 'src/services/greeting.service';
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css'],
-  providers: [GreetingService]
 })
 export class AppComponent implements OnInit {
   greetingList = [];

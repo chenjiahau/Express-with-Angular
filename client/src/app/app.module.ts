@@ -9,6 +9,9 @@ import { FontDirective } from 'src/directives/font.directive';
 import { UnlessDirective } from 'src/directives/unless.directive';
 import { SuccessMessageComponent } from './success-message/success-message.component';
 
+import { GreetingService } from 'src/services/greeting.service';
+import { logService } from 'src/services/log.service';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -22,7 +25,7 @@ import { SuccessMessageComponent } from './success-message/success-message.compo
     BrowserModule,
     NgbModule
   ],
-  providers: [],
+  providers: [GreetingService, logService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

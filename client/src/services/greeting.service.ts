@@ -1,5 +1,7 @@
-import { EventEmitter } from '@angular/core';
+import { EventEmitter, Injectable } from '@angular/core';
+import { logService } from './log.service';
 
+@Injectable()
 export class GreetingService {
   addResult = new EventEmitter<boolean>();
   list = [
@@ -7,19 +9,16 @@ export class GreetingService {
     { priority: 1, title: "Welcome" }
   ];
 
-  constructor() { }
+  constructor(private logService: logService) { }
 
-  ngOnInit(): void {
-
-  }
-  
   addGreeting(priority: number, title: string) {
-    this.list.push(
-      {
-        priority,
-        title
-      }
-    )
+    const greeting = {
+      priority,
+      title
+    };
+
+    this.logService.addLog(priority, title);
+    this.list.push(greeting)
     this.addResult.emit(true);
   }
 }
