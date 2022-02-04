@@ -7,14 +7,16 @@ import { GreetingComponent } from './greeting/greeting.component';
 import { AddGreetingComponent } from './add-greeting/add-greeting.component';
 import { FontDirective } from 'src/directives/font.directive';
 import { UnlessDirective } from 'src/directives/unless.directive';
+import { SuccessMessageComponent } from './success-message/success-message.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     GreetingComponent,
     AddGreetingComponent,
+    SuccessMessageComponent,
     FontDirective,
-    UnlessDirective
+    UnlessDirective,
   ],
   imports: [
     BrowserModule,

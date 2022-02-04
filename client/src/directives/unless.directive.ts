@@ -6,7 +6,6 @@ import { OnInit, Directive, Input, TemplateRef, ViewContainerRef } from "@angula
 export class UnlessDirective implements OnInit {
   // input a value, and set unless to method, write your condition 
   @Input() set unless(condition: boolean) {
-    console.log(condition);
     if (condition) {
       // Create the view on this ViewContainer
       this.vcRef.createEmbeddedView(this.templateRef);
