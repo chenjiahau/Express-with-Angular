@@ -1,15 +1,21 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { GreetingService } from 'src/services/greeting.service';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
-  styleUrls: ['./app.component.css']
+  styleUrls: ['./app.component.css'],
+  providers: [GreetingService]
 })
-export class AppComponent {
-  greetingList = [
-    { priority: 1, title: "Hi" },
-    { priority: 1, title: "Welcome" },
-  ]
+export class AppComponent implements OnInit {
+  greetingList = [];
+
+  constructor(private greetingService: GreetingService) {
+  }
+
+  ngOnInit(): void {
+    this.greetingList = this.greetingService.list;
+  }
 
   onAddGreeting(greeting: { priority: number, title: string }) {
     this.greetingList.push(greeting);
