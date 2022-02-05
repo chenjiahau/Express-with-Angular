@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { GreetingService } from 'src/services/greeting.service';
 
 @Component({
   selector: 'app-root',
@@ -7,14 +6,10 @@ import { GreetingService } from 'src/services/greeting.service';
   styleUrls: ['./app.component.css'],
 })
 export class AppComponent implements OnInit {
-  greetingList = [];
 
-  constructor(private greetingService: GreetingService) {
-  }
+  constructor() {}
 
-  ngOnInit(): void {
-    this.greetingList = this.greetingService.list;
-  }
+  ngOnInit(): void {}
 
   onSayGreeting(greeting: { priority: number, title: string }) {
     console.log('onSayGreeting', greeting);

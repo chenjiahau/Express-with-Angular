@@ -2,3 +2,15 @@
 body {
   margin: 20px;
 }
+
+.form-control:focus, .form-control:active:focus, .form-control.active:focus {
+  box-shadow: none !important;
+}
+
+.btn:focus, .btn:active:focus, .btn.active:focus {
+  box-shadow: none !important;
+}
+
+.navbar-light .navbar-nav .nav-link.active, .navbar-light .navbar-nav .show>.nav-link { 
+  color: blue;
+}

@@ -1,21 +1,40 @@
+<div class="container" style="margin-bottom: 20px;">
+  <div class="row">
+    <div class="col-md-12">
+      <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <div class="container-fluid">
+          <a class="navbar-brand" href="#">Greeting</a>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav">
+              <li class="nav-item">
+                <a
+                  class="nav-link"
+                  routerLinkActive="active"
+                  [routerLinkActiveOptions]="{exact: true}"
+                  [routerLink]="['/']"
+                >Home</a>
+              </li>
+              <li class="nav-item">
+                <a
+                  class="nav-link"
+                  routerLinkActive="active"
+                  [routerLink]="['/log']"
+                >Log</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </nav>
+    </div>
+  </div>
+</div>
 <div class="container">
   <div class="row">
     <div class="col-md-12">
-      <app-add-greeting></app-add-greeting>
-      <app-success-message></app-success-message>
-      <app-greeting
-        *ngFor="let greeting of greetingList"
-        [greetingItem]="greeting"
-        (sayGreeting)="onSayGreeting($event)"
-      >
-        <button
-          font
-          *unless="greeting.priority > 0"
-          [defaultFontSize]="'18px'"
-          class="say-greeing-btn"
-          (click)="onSayGreeting($event)"
-        >{{greeting.title}}</button>
-      </app-greeting>
+      <router-outlet></router-outlet>
     </div>
   </div>
 </div>

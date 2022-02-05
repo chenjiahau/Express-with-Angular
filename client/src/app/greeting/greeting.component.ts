@@ -1,4 +1,6 @@
-import { Component, OnInit, Input, EventEmitter, Output, ViewChild, ElementRef } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import { GreetingService } from 'src/services/greeting.service';
 
 @Component({
   selector: 'app-greeting',
@@ -6,15 +8,23 @@ import { Component, OnInit, Input, EventEmitter, Output, ViewChild, ElementRef }
   styleUrls: ['./greeting.component.css']
 })
 export class GreetingComponent implements OnInit {
-  @Input('greetingItem') greeting: { priority: number, title: string };
-  @Output() sayGreeting = new EventEmitter<{ priority: number, title: string }>();
+  greetingList = [];
 
-  constructor() { }
-
-  ngOnInit(): void {
+  constructor(
+    private router: Router,
+    private greetingService: GreetingService
+  ) {
   }
 
-  onSayGreeting() {
-    this.sayGreeting.emit(this.greeting);
+  ngOnInit(): void {
+    this.greetingList = this.greetingService.list;
+  }
+
+  onSayGreeting(greeting: { priority: number, title: string }) {
+    console.log(greeting);
+  }
+
+  navigateTo(where: string) {
+    this.router.navigate(['/log']);
   }
 }

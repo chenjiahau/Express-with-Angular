@@ -1,1 +1,18 @@
-<ng-content></ng-content>
+<div class="text-end">
+  [<a (click)="navigateTo('log')">Logs</a>]
+</div>
+<app-add-greeting></app-add-greeting>
+<app-success-message></app-success-message>
+<div
+  *ngFor="let greeting of greetingList"
+  [greetingItem]="greeting"
+  (sayGreeting)="onSayGreeting($event)"
+>
+  <button
+    font
+    *unless="greeting.priority > 0"
+    [defaultFontSize]="'18px'"
+    class="say-greeing-btn"
+    (click)="onSayGreeting(greeting)"
+  >{{greeting.title}}</button>
+</div>
