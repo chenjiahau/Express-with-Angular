@@ -8,6 +8,7 @@ import { GreetingComponent } from './greeting/greeting.component';
 import { AddGreetingComponent } from './add-greeting/add-greeting.component';
 import { SuccessMessageComponent } from './success-message/success-message.component';
 import { LogComponent } from './log/log.component';
+import { NotFoundComponent } from './not-found/not-found.component';
 
 import { FontDirective } from 'src/directives/font.directive';
 import { UnlessDirective } from 'src/directives/unless.directive';
@@ -15,7 +16,6 @@ import { UnlessDirective } from 'src/directives/unless.directive';
 import { GreetingService } from 'src/services/greeting.service';
 import { LogService } from 'src/services/log.service';
 import { LogDetailComponent } from './log/log-detail/log-detail.component';
-
 
 const appRoutes: Routes = [
   { path: '', component: GreetingComponent },
@@ -25,7 +25,9 @@ const appRoutes: Routes = [
     children: [
       { path: ':id', component: LogDetailComponent }
     ]
-  }
+  },
+  { path: 'not-found', component: NotFoundComponent },
+  { path: '**', redirectTo: "/not-found" },
 ]
 
 
@@ -39,6 +41,7 @@ const appRoutes: Routes = [
     UnlessDirective,
     LogComponent,
     LogDetailComponent,
+    NotFoundComponent
   ],
   imports: [
     BrowserModule,

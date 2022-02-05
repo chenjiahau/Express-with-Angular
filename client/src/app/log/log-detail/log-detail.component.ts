@@ -19,7 +19,7 @@ export class LogDetailComponent implements OnInit {
   ngOnInit(): void {
     let logId: number = parseInt(this.route.snapshot.params['id']);
     this.log = this.logService.getLog(logId);
-    console.log(this.log);
+
     this.route.params
       .subscribe((params: Params) => {
         logId = parseInt(params['id']);
