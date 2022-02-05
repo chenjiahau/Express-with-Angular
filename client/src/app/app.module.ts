@@ -13,7 +13,7 @@ import { FontDirective } from 'src/directives/font.directive';
 import { UnlessDirective } from 'src/directives/unless.directive';
 
 import { GreetingService } from 'src/services/greeting.service';
-import { logService } from 'src/services/log.service';
+import { LogService } from 'src/services/log.service';
 
 
 const appRoutes: Routes = [
@@ -36,7 +36,7 @@ const appRoutes: Routes = [
     BrowserModule,
     RouterModule.forRoot(appRoutes)
   ],
-  providers: [GreetingService, logService],
+  providers: [GreetingService, LogService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

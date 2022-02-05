@@ -1,5 +1,5 @@
 import { EventEmitter, Injectable } from '@angular/core';
-import { logService } from './log.service';
+import { LogService } from './log.service';
 
 @Injectable()
 export class GreetingService {
@@ -9,7 +9,7 @@ export class GreetingService {
     { priority: 1, title: "Welcome" }
   ];
 
-  constructor(private logService: logService) { }
+  constructor(private logService: LogService) { }
 
   get list() {
     return this._list; 
