@@ -3,7 +3,6 @@ import { NgModule } from '@angular/core';
 import bootstrap from 'bootstrap';
 
 import { AppComponent } from './app.component';
-import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { GreetingComponent } from './greeting/greeting.component';
 import { AddGreetingComponent } from './add-greeting/add-greeting.component';
 import { FontDirective } from 'src/directives/font.directive';
@@ -23,8 +22,7 @@ import { logService } from 'src/services/log.service';
     UnlessDirective,
   ],
   imports: [
-    BrowserModule,
-    NgbModule
+    BrowserModule
   ],
   providers: [GreetingService, logService],
   bootstrap: [AppComponent]
