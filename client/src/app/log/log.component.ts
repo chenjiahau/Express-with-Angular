@@ -8,11 +8,12 @@ import { LogService } from 'src/services/log.service';
   styleUrls: ['./log.component.css']
 })
 export class LogComponent implements OnInit {
+  logList: { priority: number, title: string }[] = [];
 
   constructor(private logService: LogService) { }
 
   ngOnInit(): void {
-    console.log(this.logService.getLog());
+    this.logList = this.logService.getLogList();
   }
 
 }
