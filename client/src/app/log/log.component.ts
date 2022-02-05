@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
 
 import { LogService } from 'src/services/log.service';
 
@@ -8,12 +9,19 @@ import { LogService } from 'src/services/log.service';
   styleUrls: ['./log.component.css']
 })
 export class LogComponent implements OnInit {
-  logList: { priority: number, title: string }[] = [];
+  logList: { id: number, priority: number, title: string }[] = [];
 
-  constructor(private logService: LogService) { }
+  constructor(
+    private router: Router,
+    private route: ActivatedRoute,
+    private logService: LogService
+  ) { }
 
   ngOnInit(): void {
     this.logList = this.logService.getLogList();
   }
 
+  showDetail(logId: number) {
+    this.router.navigate([logId], { relativeTo: this.route });
+  }
 }

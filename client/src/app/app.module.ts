@@ -14,11 +14,18 @@ import { UnlessDirective } from 'src/directives/unless.directive';
 
 import { GreetingService } from 'src/services/greeting.service';
 import { LogService } from 'src/services/log.service';
+import { LogDetailComponent } from './log/log-detail/log-detail.component';
 
 
 const appRoutes: Routes = [
   { path: '', component: GreetingComponent },
-  { path: 'log', component: LogComponent }
+  {
+    path: 'log',
+    component: LogComponent,
+    children: [
+      { path: ':id', component: LogDetailComponent }
+    ]
+  }
 ]
 
 
@@ -31,6 +38,7 @@ const appRoutes: Routes = [
     FontDirective,
     UnlessDirective,
     LogComponent,
+    LogDetailComponent,
   ],
   imports: [
     BrowserModule,

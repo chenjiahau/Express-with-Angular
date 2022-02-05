@@ -1,8 +1,8 @@
 <div class="log-item-header">
-  <div class="log-item-priority">PRIORITY</div>
-  <div class="log-item-title">TITLE</div>
+  <div class="log-item-id">ID</div>
  </div>
-<div class="log-item-list" *ngFor="let log of logList">
- <div class="log-item-priority">{{log.priority}}</div>
- <div class="log-item-title">{{log.title}}</div>
+<div class="log-item-list" *ngFor="let log of logList" (click)="showDetail(log.id)">
+ <div class="log-item-id"><a [routerLink]="[log.id]">{{log.id}}</a></div>
 </div>
+
+<router-outlet></router-outlet>
