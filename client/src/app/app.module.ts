@@ -15,14 +15,20 @@ import { UnlessDirective } from 'src/directives/unless.directive';
 
 import { GreetingService } from 'src/services/greeting.service';
 import { LogService } from 'src/services/log.service';
+import { LogIntroComponent } from './log-intro/log-intro.component';
 import { LogDetailComponent } from './log/log-detail/log-detail.component';
 
 const appRoutes: Routes = [
-  { path: '', component: GreetingComponent },
+  // An empty path is the path of every route
+  // So redirect to greeting also redirect empty path, it doesn't work
+  // It need to set pathMath to full
+  { path: '', redirectTo: '/greeting', pathMatch: 'full' },
+  { path: 'greeting', component: GreetingComponent },
   {
     path: 'log',
     component: LogComponent,
     children: [
+      { path: '', component: LogIntroComponent },
       { path: ':id', component: LogDetailComponent }
     ]
   },
@@ -41,7 +47,8 @@ const appRoutes: Routes = [
     UnlessDirective,
     LogComponent,
     LogDetailComponent,
-    NotFoundComponent
+    NotFoundComponent,
+    LogIntroComponent
   ],
   imports: [
     BrowserModule,
