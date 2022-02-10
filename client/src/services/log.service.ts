@@ -1,11 +1,10 @@
 import { Injectable } from '@angular/core';
 
+import { IGreeting } from '../models/greeting';
+
 @Injectable()
 export class LogService {
-  private _logList: { id: number, priority: number, title: string }[] = [
-    { id: 1, priority: 10, title: 'Hi'},
-    { id: 2, priority: 100, title: 'Hi'}
-  ];
+  private _logList: IGreeting[] = [];
 
   constructor() { }
 
@@ -16,15 +15,11 @@ export class LogService {
     return this._logList;
   }
 
-  getLog(logId: number): { id: number, priority: number, title: string } {
+  getLog(logId: number): IGreeting {
     return this._logList.find(log => log.id === logId);
   }
 
-  addLog(priority: number, title: string) {
-    this._logList.push({
-      id: this._logList.length,
-      priority,
-      title
-    });
+  addLog(greeting: IGreeting) {
+    this._logList.push(greeting);
   }
 }

@@ -1,27 +1,82 @@
 <div class="input-container">
-  <label for="priorityInput">Priority</label>
-  <input
-    id="priorityInput"
-    type="number"
-    value="1"
-    class="form-control"
-    #priority
-  >
+  <hr />
+  <div class="row mb-20">
+    <app-success-message></app-success-message>
+  </div>
+  <div class="row mb-10">
+    <div class="col col-md-2 d-flex justify-content-center align-items-center">
+      <label for="priorityInput">Priority</label>
+    </div>
+    <div class="col col-md-10 d-flex align-items-center">
+      <input
+        id="priorityInput"
+        type="number"
+        value="1"
+        class="form-control"
+        [(ngModel)]="priority"
+      />
+    </div>
+  </div>
+  <div class="row mb-10">
+    <div class="col col-md-2 d-flex justify-content-center align-items-center">
+      <label for="titleInput">Title</label>
+    </div>
+    <div class="col col-md-10 d-flex align-items-center">
+      <input
+        id="titleInput"
+        type="text"
+        value="Hi"
+        class="form-control"
+        [(ngModel)]="title"
+      />
+    </div>
+  </div>
+  <div class="row mb-10">
+    <div class="col col-md-2 d-flex justify-content-center align-items-center">
+      <label for="priorityInput">State</label>
+    </div>
+    <div class="col col-md-10 d-flex align-items-center">
+      <div class="form-check form-check-inline">
+        <input
+          id="stateEnable"
+          class="form-check-input"
+          type="radio"
+          [checked]="state"
+          (click)="changeState(true)"
+        />
+        <label class="form-check-label" for="stateEnable">Enable</label>
+      </div>
+      <div class="form-check form-check-inline">
+        <input
+          id="stateDisable"
+          class="form-check-input"
+          type="radio"
+          [checked]="!state"
+          (click)="changeState(false)"
+        />
+        <label class="form-check-label" for="stateDisable">Disable</label>
+      </div>
+    </div>
+  </div>
+  <div class="row mb-20">
+    <div class="col col-md-2 d-flex justify-content-center align-items-center">
+      <label for="priorityInput">Description</label>
+    </div>
+    <div class="col col-md-10 d-flex align-items-center">
+      <textarea [(ngModel)]='description' rows="10" style="width:100%">
+      </textarea>
+    </div>
+  </div>
+  <div class="row mb-20">
+    <div class="col col-md-2">
+    </div>
+    <div class="col col-md-10">
+      <button
+        class="btn btn-primary"
+        (click)="onAddGreeing()"
+      >
+        Add
+      </button>
+    </div>
+  </div>
 </div>
-<div class="input-container">
-  <label for="titleInput">Title</label>
-  <input
-    id="titleInput"
-    type="text"
-    value="Hi"
-    class="form-control"
-    #title
-  >
-</div>
-<div class="btn-container">
-  <button
-    class="btn btn-primary"
-    (click)="onAddGreeing(priority, title)"
-  >Add</button>
-</div>
-

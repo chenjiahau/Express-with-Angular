@@ -9,13 +9,25 @@ import { GreetingService } from 'src/services/greeting.service';
   // providers: [GreetingService]
 })
 export class AddGreetingComponent implements OnInit {
+  priority: number;
+  title: string;
+  state: boolean;
+  description: string;
 
   constructor(private greetingService: GreetingService) { }
 
   ngOnInit(): void {
+    this.priority = 1;
+    this.title = 'Hi';
+    this.state = false;
+    this.description = "";
   }
 
-  onAddGreeing(priorityInput, titleInput) {
-    this.greetingService.addGreeting(priorityInput.value, titleInput.value);
+  changeState(state: boolean) {
+    this.state = state;
+  }
+
+  onAddGreeing() {
+    this.greetingService.addGreeting(this.priority, this.title, this.state, this.description);
   }
 }
