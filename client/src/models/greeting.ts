@@ -4,6 +4,7 @@ export interface IGreeting {
   title: string;
   state: boolean;
   description: string;
+  createdDate: Date;
 }
 
 export class Greeting {
@@ -12,6 +13,7 @@ export class Greeting {
   title: string;
   state: boolean;
   description: string;
+  createdDate: Date;
 
   constructor(greeting: IGreeting) {
     this.id = greeting.id;
@@ -19,5 +21,6 @@ export class Greeting {
     this.title = greeting.title;
     this.state = greeting.state;
     this.description = greeting.description;
+    this.createdDate = greeting.createdDate;
   }
 }

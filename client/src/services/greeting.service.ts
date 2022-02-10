@@ -2,7 +2,6 @@ import { EventEmitter, Injectable } from '@angular/core';
 import { LogService } from './log.service';
 
 import { Greeting, IGreeting } from '../models/greeting';
-import { NoSubstitutionTemplateLiteral } from 'typescript';
 
 @Injectable()
 export class GreetingService {
@@ -13,14 +12,16 @@ export class GreetingService {
       priority: 1,
       title: 'Hi',
       state: true,
-      description: ''
+      description: '',
+      createdDate: new Date()
     },
     {
       id: 2,
       priority: 2,
       title: 'Welcome',
       state: true,
-      description: ''
+      description: '',
+      createdDate: new Date()
     }
   ];
 
@@ -37,7 +38,8 @@ export class GreetingService {
       priority,
       title,
       state,
-      description
+      description,
+      createdDate: new Date()
     });
 
     this.logService.addLog(greeting);

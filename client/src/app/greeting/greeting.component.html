@@ -3,16 +3,25 @@
 </div>
 <app-add-greeting></app-add-greeting>
 <div class="mb-20"></div>
-<div
-  *ngFor="let greeting of greetingList"
-  [greetingItem]="greeting"
-  (sayGreeting)="onSayGreeting($event)"
->
-  <button
-    font
-    *unless="greeting.priority > 0"
-    [defaultFontSize]="'18px'"
-    class="say-greeing-btn"
-    (click)="onSayGreeting(greeting)"
-  >{{greeting.title}}</button>
+<div>
+  <div 
+    class="row"
+    *ngFor="let greeting of greetingList"
+    [greetingItem]="greeting"
+    (sayGreeting)="onSayGreeting($event)"
+  >
+    <div class="col col-md-2">
+    </div>
+    <div class="col col-md-10">
+      <button
+        font
+        *unless="greeting.priority > 0"
+        [defaultFontSize]="'18px'"
+        class="say-greeing-btn"
+        (click)="onSayGreeting(greeting)"
+      >
+        {{greeting.title}}
+      </button>
+    </div>
+  </div>
 </div>
