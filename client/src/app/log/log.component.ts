@@ -10,6 +10,7 @@ import { LogService } from 'src/services/log.service';
 })
 export class LogComponent implements OnInit {
   orderBy: string;
+  fragment: string;
   logList: { id: number, priority: number, title: string }[] = [];
 
   constructor(
@@ -27,6 +28,13 @@ export class LogComponent implements OnInit {
       (queryParams: Params) => {
         this.orderBy = queryParams['orderBy'];
         this.logList = this.logService.getLogList(this.orderBy);
+      }
+    )
+
+    this.fragment = this.route.snapshot.fragment;
+    this.route.fragment.subscribe(
+      (fragment: string) => {
+        console.log(fragment);
       }
     )
   }
