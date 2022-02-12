@@ -25,6 +25,6 @@ export class GreetingComponent implements OnInit {
   }
 
   navigateTo(where: string) {
-    this.router.navigate(['/log']);
+    this.router.navigate(['/log'], {queryParams: {orderBy: 'id'}});
   }
 }

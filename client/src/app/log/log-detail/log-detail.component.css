@@ -1,10 +1,8 @@
 .log-header {
   display: flex;
   flex-direction: row;
-  border-top: 1px solid #eeeeee;
   border-bottom: 1px solid #eeeeee;
-  margin-top: 20px;
-  background-color: #eeeeee;
+  margin-top: 60px;
 }
 
 .log-detail {
@@ -12,11 +10,13 @@
   flex-direction: row;
 }
 
-.log-id {
-  width: 200px;
+.log-field {
+  width: 120px;
   padding-left: 20px;
+  margin: 6px 0 6px 0;
 }
 
-.log-priority {
-  width: 200px;
+.log-value {
+  flex: 1;
+  margin: 6px 0 6px 0;
 }

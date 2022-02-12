@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Params } from '@angular/router';
+
+import { IGreeting } from 'src/models/greeting';
 import { LogService } from 'src/services/log.service';
 
 @Component({
@@ -9,7 +11,7 @@ import { LogService } from 'src/services/log.service';
 })
 export class LogDetailComponent implements OnInit {
   logId: number;
-  log: { id: number, priority: number, title: string };
+  log: IGreeting;
 
   constructor(
     private route: ActivatedRoute,

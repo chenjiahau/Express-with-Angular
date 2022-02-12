@@ -16,7 +16,7 @@ import { UnlessDirective } from 'src/directives/unless.directive';
 
 import { GreetingService } from 'src/services/greeting.service';
 import { LogService } from 'src/services/log.service';
-import { LogIntroComponent } from './log-intro/log-intro.component';
+import { LogIntroComponent } from './log/log-intro/log-intro.component';
 import { LogDetailComponent } from './log/log-detail/log-detail.component';
 
 const appRoutes: Routes = [

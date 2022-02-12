@@ -1,10 +1,20 @@
 <div class="log-header">
-  <div class="log-id">ID</div>
-  <div class="log-priority">PRIORITY</div>
-  <div class="log-title">TITLE</div>
+  <div class="log-field">FIELD</div>
+  <div class="log-value">VALUE</div>
 </div>
 <div class="log-detail">
-  <div class="log-id">{{log.id}}</div>
-  <div class="log-priority">{{log.priority}}</div>
-  <div class="log-title">{{log.title}}</div>
+  <div class="log-field">TITLE</div>
+  <div class="log-value">{{log.title}}</div>
+</div>
+<div class="log-detail">
+  <div class="log-field">PRIORITY</div>
+  <div class="log-value">{{log.priority}}</div>
+</div>
+<div class="log-detail">
+  <div class="log-field">STATE</div>
+  <div class="log-value">{{log.state ? 'Enabled' : 'Disabled'}}</div>
+</div>
+<div class="log-detail">
+  <div class="log-field">Create date</div>
+  <div class="log-value">{{log.createdDate}}</div>
 </div>

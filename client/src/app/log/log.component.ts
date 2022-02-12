@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute, Params, Router } from '@angular/router';
 
 import { LogService } from 'src/services/log.service';
 
@@ -9,6 +9,7 @@ import { LogService } from 'src/services/log.service';
   styleUrls: ['./log.component.css']
 })
 export class LogComponent implements OnInit {
+  orderBy: string;
   logList: { id: number, priority: number, title: string }[] = [];
 
   constructor(
@@ -18,10 +19,25 @@ export class LogComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.logList = this.logService.getLogList();
+    this.orderBy = this.route.snapshot.queryParams['orderBy']
+    !this.orderBy && (this.orderBy = 'id');
+    this.logList = this.logService.getLogList(this.orderBy);
+
+    this.route.queryParams.subscribe(
+      (queryParams: Params) => {
+        this.orderBy = queryParams['orderBy'];
+        this.logList = this.logService.getLogList(this.orderBy);
+      }
+    )
   }
 
   showDetail(logId: number) {
-    this.router.navigate([logId], { relativeTo: this.route });
+    this.router.navigate(
+      [logId],
+      {
+        relativeTo: this.route,
+        queryParamsHandling: 'preserve'
+      }
+    );
   }
 }

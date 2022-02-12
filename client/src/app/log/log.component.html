@@ -1,8 +1,36 @@
+<div class="log-switch-type">
+  <a
+    class="log-switch-type-item"
+    [routerLink]="['.']"
+    [queryParams]="{orderBy: 'id'}"
+    fragment="changeOrderType"
+  >
+    ID
+  </a>
+  <a
+    class="log-switch-type-item"
+    [routerLink]="['.']"
+    [queryParams]="{orderBy: 'priority'}"
+    fragment="changeOrderType"
+  >
+    Priority
+  </a>
+</div>
 <div class="log-item-header">
-  <div class="log-item-id">ID</div>
+  <div class="log-item-id">TITLE</div>
+  <div class="log-item-other">STATE</div>
  </div>
 <div class="log-item-list" *ngFor="let log of logList" (click)="showDetail(log.id)">
- <div class="log-item-id"><a [routerLink]="[log.id]">{{log.id}}</a></div>
+  <div class="log-item-id">
+    <a (click)="showDetail(log.id)">
+      {{log.title}}
+    </a>
+  </div>
+  <div class="log-item-other">
+    <div>
+      {{log.state ? 'Enabled' : 'Disabled'}}
+    </div>
+  </div>
 </div>
 
 <router-outlet></router-outlet>
