@@ -33,7 +33,13 @@ const appRoutes: Routes = [
       { path: ':id', component: LogDetailComponent }
     ]
   },
-  { path: 'not-found', component: NotFoundComponent },
+  {
+    path: 'not-found',
+    component: NotFoundComponent,
+    data: {
+      message: "Something wrong!"
+    }
+  },
   { path: '**', redirectTo: "/not-found" },
 ]
 
