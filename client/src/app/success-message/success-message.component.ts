@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Subscription } from 'rxjs';
 
 import { GreetingService } from 'src/services/greeting.service';
 
@@ -7,7 +8,8 @@ import { GreetingService } from 'src/services/greeting.service';
   templateUrl: './success-message.component.html',
   styleUrls: ['./success-message.component.css']
 })
-export class SuccessMessageComponent implements OnInit {
+export class SuccessMessageComponent implements OnInit, OnDestroy {
+  private addResultSubscription: Subscription;
   show: boolean = false;
 
   constructor(private greetingService: GreetingService) {
@@ -20,12 +22,16 @@ export class SuccessMessageComponent implements OnInit {
     //     setTimeout(() => this.show = false, 3000);
     //   }
     // )
-    this.greetingService.addResult.subscribe(
+    this.addResultSubscription = this.greetingService.addResult.subscribe(
       (result: boolean) => {
         this.show = result;
         setTimeout(() => this.show = false, 3000);
       }
     )
+  }
+
+  ngOnDestroy(): void {
+    this.addResultSubscription.unsubscribe();
   }
 
 }
