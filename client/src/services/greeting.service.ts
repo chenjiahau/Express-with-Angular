@@ -1,11 +1,13 @@
-import { EventEmitter, Injectable } from '@angular/core';
-import { LogService } from './log.service';
+import { Injectable } from '@angular/core';
+import { Subject } from 'rxjs';
 
+import { LogService } from './log.service';
 import { Greeting, IGreeting } from '../models/greeting';
 
 @Injectable()
 export class GreetingService {
-  addResult = new EventEmitter<boolean>();
+  addResult = new Subject<boolean>();
+  // addResult = new EventEmitter<boolean>();
   _list = [
     {
       id: 1,
@@ -32,6 +34,11 @@ export class GreetingService {
   }
 
   addGreeting(priority: number, title: string, state: boolean, description: string) {
+    if (this._list.length === 10) {
+      this.addResult.next(false);
+      return;
+    }
+
     const id: number = this.list.length + 1;
     const greeting: IGreeting = new Greeting({
       id,
@@ -43,7 +50,8 @@ export class GreetingService {
     });
 
     this.logService.addLog(greeting);
-    this._list.push(greeting)
-    this.addResult.emit(true);
+    this._list.push(greeting);
+    
+    this.addResult.next(true);
   }
 }

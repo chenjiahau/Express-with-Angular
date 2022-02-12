@@ -14,6 +14,12 @@ export class SuccessMessageComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    // this.greetingService.addResult.subscribe(
+    //   (result: boolean) => {
+    //     this.show = result;
+    //     setTimeout(() => this.show = false, 3000);
+    //   }
+    // )
     this.greetingService.addResult.subscribe(
       (result: boolean) => {
         this.show = result;
