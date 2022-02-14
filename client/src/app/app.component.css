@@ -1,0 +1,10 @@
+.questionnairy-container {
+  margin-top: 12px;
+  padding: 12px;
+  border: 1px solid #eeeeee;
+  border-radius: 32px;;
+}
+
+.field {
+  padding: 12px;
+}

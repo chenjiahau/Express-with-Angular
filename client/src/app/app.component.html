@@ -1,3 +1,142 @@
 <div class="container">
-  <h1>{{title}}</h1>
+  <div class="row">
+    <div class="col-md-12">
+      <div class="questionnairy-container">
+        <h1>Questionnairy</h1>
+        <hr>
+        <form>
+          <div class="form-group row">
+            <label class="col-sm-2 col-form-label">Email</label>
+            <div class="col-sm-10">
+              <input
+                type="email"
+                class="form-control"
+              >
+            </div>
+          </div>
+          <div class="form-group row">
+            <label class="col-sm-2 col-form-label">Firstname</label>
+            <div class="col-sm-10">
+              <input
+                type="firstname"
+                class="form-control"
+              >
+            </div>
+          </div>
+          <div class="form-group row">
+            <label class="col-sm-2 col-form-label">Lastname</label>
+            <div class="col-sm-10">
+              <input
+                type="lasttname"
+                class="form-control"
+              >
+            </div>
+          </div>
+          <div class="form-group row">
+            <label class="col-sm-2 col-form-label">Gender</label>
+            <div class="col-sm-10">
+              <select id="inputState" class="form-control">
+                <option selected>Choose...</option>
+                <option>Male</option>
+                <option>Female</option>
+              </select>
+            </div>
+          </div>
+          <fieldset class="form-group row">
+            <legend class="col-form-label col-sm-2 float-sm-left pt-0">Age</legend>
+            <div class="col-sm-10">
+              <div class="form-check">
+                <input
+                  class="form-check-input"
+                  type="radio"
+                  name="age"
+                  value="child" checked
+                >
+                <label class="form-check-label">
+                  Child
+                </label>
+              </div>
+              <div class="form-check">
+                <input
+                  class="form-check-input"
+                  type="radio"
+                  name="age"
+                  value="teenager"
+                >
+                <label class="form-check-label">
+                  Teenager
+                </label>
+              </div>
+              <div class="form-check">
+                <input
+                  class="form-check-input"
+                  type="radio"
+                  name="age"
+                  value="young"
+                >
+                <label class="form-check-label">
+                  Young
+                </label>
+              </div>
+              <div class="form-check">
+                <input
+                  class="form-check-input"
+                  type="radio"
+                  name="age"
+                  value="old"
+                >
+                <label class="form-check-label">
+                  Old
+                </label>
+              </div>
+            </div>
+          </fieldset>
+          <fieldset class="form-group row">
+            <legend class="col-form-label col-sm-2 float-sm-left pt-0">Habit</legend>
+            <div class="col-sm-10">
+              <div class="form-check">
+                <input
+                  class="form-check-input"
+                  type="checkbox"
+                >
+                <label class="form-check-label">
+                  Hiking
+                </label>
+              </div>
+              <div class="form-check">
+                <input
+                  class="form-check-input"
+                  type="checkbox"
+                >
+                <label class="form-check-label">
+                  Sports
+                </label>
+              </div><div class="form-check">
+                <input
+                  class="form-check-input"
+                  type="checkbox"
+                >
+                <label class="form-check-label">
+                  Sleeping
+                </label>
+              </div>
+            </div>
+          </fieldset>
+          <div class="form-group row">
+            <label class="col-sm-2 col-form-label">About yourself</label>
+            <div class="col-sm-10">
+              <textarea
+                class="form-control"
+              ></textarea>
+            </div>
+          </div>
+          <div class="form-group">
+            <div class="text-right">
+              <button type="submit" class="btn btn-primary">Sign in</button>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
 </div>
