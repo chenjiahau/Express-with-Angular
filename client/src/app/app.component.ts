@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { NgForm } from '@angular/forms';
 
 @Component({
@@ -9,16 +9,27 @@ import { NgForm } from '@angular/forms';
 export class AppComponent implements OnInit {
   genderList: string[];
   ageList: string[];
-  habitList: { title: string; selected: boolean;}[];
+  data: {
+    email: string;
+    firstname: string;
+    lastname: string;
+    gender: string;
+    age: string;
+    aboutyou: string;
+  }
 
   ngOnInit() {
     this.genderList = ["Male", "Female"];
     this.ageList = ["Child", "Teenager", "Young", "Old"];
-    this.habitList = [
-      { title: "Hiking", selected: false },
-      { title: "Sports", selected: false },
-      { title: "Sleeping", selected: false },
-    ];
+
+    this.data = {
+      email: "my@c.c",
+      firstname: "I",
+      lastname: "I",
+      gender: "Female",
+      age: "Teenager",
+      aboutyou: "aboutyou"
+    }
   }
 
   onSubmit(questionnarie: NgForm) {
