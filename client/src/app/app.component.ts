@@ -34,5 +34,6 @@ export class AppComponent implements OnInit {
 
   onSubmit(questionnarie: NgForm) {
     console.log(questionnarie);
+    questionnarie.reset();
   }
 }
