@@ -24,8 +24,8 @@ export class AppComponent implements OnInit {
 
     this.data = {
       email: "my@c.c",
-      firstname: "I",
-      lastname: "I",
+      firstname: "i",
+      lastname: "i",
       gender: "Female",
       age: "Teenager",
       aboutyou: "aboutyou"
