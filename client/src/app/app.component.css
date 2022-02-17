@@ -8,3 +8,7 @@
 .field {
   padding: 12px;
 }
+
+input.ng-invalid {
+  border-color: red
+}
