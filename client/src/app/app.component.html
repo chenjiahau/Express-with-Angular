@@ -13,6 +13,7 @@
                 class="form-control"
                 ngModel
                 name="email"
+                email
                 required
                 [(ngModel)]="data.email"
               >
@@ -26,6 +27,7 @@
                 class="form-control"
                 ngModel
                 name="firstname"
+                pattern="^[a-z0-9_-]{1,10}$"
                 required
                 [(ngModel)]="data.firstname"
               >
@@ -39,6 +41,7 @@
                 class="form-control"
                 ngModel
                 name="lasttname"
+                pattern="^[a-z0-9_-]{1,10}$"
                 required
                 [(ngModel)]="data.lastname"
               >
