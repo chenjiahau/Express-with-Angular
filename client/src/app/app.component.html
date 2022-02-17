@@ -4,7 +4,7 @@
       <div class="questionnairy-container">
         <h1>Questionnairy</h1>
         <hr>
-        <form>
+        <form [formGroup]="questionnaireForm" (ngSubmit)="onSubmit()">
           <div class="form-group row">
             <label class="col-sm-2 col-form-label">Email</label>
             <div class="col-sm-10">
@@ -12,6 +12,7 @@
                 type="email"
                 class="form-control"
                 name="email"
+                formControlName="email"
               >
             </div>
           </div>
@@ -22,6 +23,7 @@
                 type="firstname"
                 class="form-control"
                 name="firstname"
+                formControlName="firstname"
               >
             </div>
           </div>
@@ -29,9 +31,10 @@
             <label class="col-sm-2 col-form-label">Lastname</label>
             <div class="col-sm-10">
               <input
-                type="lasttname"
+                type="type"
                 class="form-control"
                 name="lastname"
+                formControlName="lastname"
               >
             </div>
           </div>
@@ -41,10 +44,12 @@
               <select
                 class="form-control"
                 name="gender"
+                formControlName="gender"
               >
                 <option selected>Choose...</option>
                 <option
                   *ngFor="let gender of genderList"
+                  [ngValue]="gender"
                 >
                   {{gender}}
                 </option>
@@ -62,6 +67,8 @@
                   class="form-check-input"
                   type="radio"
                   name="age"
+                  formControlName="age"
+                  [value]="age"
                 >
                 <label class="form-check-label">
                   {{age}}
@@ -75,7 +82,7 @@
               <textarea
                 class="form-control"
                 name="aboutyou"
-                ngModel
+                formControlName="aboutyou"
               ></textarea>
             </div>
           </div>
