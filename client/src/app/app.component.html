@@ -4,7 +4,7 @@
       <div class="questionnairy-container">
         <h1>Questionnairy</h1>
         <hr>
-        <form (ngSubmit)="onSubmit(questionnarieForm)" #questionnarieForm="ngForm">
+        <form>
           <div class="form-group row">
             <label class="col-sm-2 col-form-label">Email</label>
             <div class="col-sm-10">
@@ -12,17 +12,7 @@
                 type="email"
                 class="form-control"
                 name="email"
-                email
-                required
-                #email="ngModel"
-                [(ngModel)]="data.email"
               >
-            </div>
-          </div>
-          <div class="form-group row" *ngIf="email.touched && !email.valid">
-            <label class="col-sm-2 col-form-label"></label>
-            <div class="col-sm-10">
-              <div class="col-sm-12 alert alert-danger" role="alert">Invalid e-mail</div>
             </div>
           </div>
           <div class="form-group row">
@@ -32,17 +22,7 @@
                 type="firstname"
                 class="form-control"
                 name="firstname"
-                pattern="^[a-z0-9_-]{1,10}$"
-                required
-                #firstname="ngModel"
-                [(ngModel)]="data.firstname"
               >
-            </div>
-          </div>
-          <div class="form-group row" *ngIf="firstname.touched && !firstname.valid">
-            <label class="col-sm-2 col-form-label"></label>
-            <div class="col-sm-10">
-              <div class="col-sm-12 alert alert-danger" role="alert">Invalid first name</div>
             </div>
           </div>
           <div class="form-group row">
@@ -52,17 +32,7 @@
                 type="lasttname"
                 class="form-control"
                 name="lastname"
-                pattern="^[a-z0-9_-]{1,10}$"
-                required
-                #lastname="ngModel"
-                [(ngModel)]="data.lastname"
               >
-            </div>
-          </div>
-          <div class="form-group row" *ngIf="lastname.touched && !lastname.valid">
-            <label class="col-sm-2 col-form-label"></label>
-            <div class="col-sm-10">
-              <div class="col-sm-12 alert alert-danger" role="alert">Invalid last name</div>
             </div>
           </div>
           <div class="form-group row">
@@ -71,9 +41,6 @@
               <select
                 class="form-control"
                 name="gender"
-                ngModel
-                required
-                [(ngModel)]="data.gender"
               >
                 <option selected>Choose...</option>
                 <option
@@ -95,9 +62,6 @@
                   class="form-check-input"
                   type="radio"
                   name="age"
-                  required
-                  [value]="age"
-                 [(ngModel)]="data.age"
                 >
                 <label class="form-check-label">
                   {{age}}
@@ -112,8 +76,6 @@
                 class="form-control"
                 name="aboutyou"
                 ngModel
-                required
-                [(ngModel)]="data.aboutyou"
               ></textarea>
             </div>
           </div>
@@ -122,8 +84,7 @@
               <button
                 type="submit"
                 class="btn btn-primary"
-                [disabled]='!questionnarieForm.valid'
-              >Sign in</button>
+              >Post</button>
             </div>
           </div>
         </form>
