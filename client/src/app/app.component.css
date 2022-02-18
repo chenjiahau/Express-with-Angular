@@ -9,6 +9,10 @@
   padding: 12px;
 }
 
-input.ng-invalid {
+input.ng-invalid.ng-touched {
+  border-color: red
+}
+
+textarea.ng-invalid.ng-touched {
   border-color: red
 }

@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormControl, FormGroup } from '@angular/forms';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-root',
@@ -16,12 +16,38 @@ export class AppComponent implements OnInit {
     this.ageList = ["Child", "Teenager", "Young", "Old"];
 
     this.questionnaireForm = new FormGroup({
-      'email': new FormControl(null),
-      'firstname': new FormControl(null),
-      'lastname': new FormControl(null),
+      'email': new FormControl(
+        null,
+        [
+          Validators.email,
+          Validators.required
+        ]
+      ),
+      'firstname': new FormControl(
+        null,
+        [
+          Validators.minLength(1),
+          Validators.maxLength(10),
+          Validators.required
+        ]
+      ),
+      'lastname': new FormControl(
+        null,
+        [
+          Validators.minLength(1),
+          Validators.maxLength(10),
+          Validators.required
+        ]
+      ),
       'gender': new FormControl(this.genderList[0]),
       'age': new FormControl(this.ageList[1]),
-      'aboutyou': new FormControl(null)
+      'aboutyou': new FormControl(
+        null,
+        [
+          Validators.minLength(1),
+          Validators.required
+        ]
+      )
     });
   }
 
