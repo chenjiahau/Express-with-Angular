@@ -24,22 +24,24 @@ export class AppComponent implements OnInit {
           this.checkEmail.bind(this)
         ]
       ),
-      'firstname': new FormControl(
-        null,
-        [
-          Validators.minLength(1),
-          Validators.maxLength(10),
-          Validators.required
-        ]
-      ),
-      'lastname': new FormControl(
-        null,
-        [
-          Validators.minLength(1),
-          Validators.maxLength(10),
-          Validators.required
-        ]
-      ),
+      'username': new FormGroup({
+        'firstname': new FormControl(
+          null,
+          [
+            Validators.minLength(1),
+            Validators.maxLength(10),
+            Validators.required
+          ]
+        ),
+        'lastname': new FormControl(
+          null,
+          [
+            Validators.minLength(1),
+            Validators.maxLength(10),
+            Validators.required
+          ]
+        ),
+      }),
       'gender': new FormControl(this.genderList[0]),
       'age': new FormControl(this.ageList[1]),
       'aboutyou': new FormControl(null)
@@ -56,5 +58,6 @@ export class AppComponent implements OnInit {
 
   onSubmit() {
     console.log(this.questionnaireForm);
+    this.questionnaireForm.reset();
   }
 }
