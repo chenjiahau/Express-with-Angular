@@ -42,13 +42,7 @@ export class AppComponent implements OnInit {
       ),
       'gender': new FormControl(this.genderList[0]),
       'age': new FormControl(this.ageList[1]),
-      'aboutyou': new FormControl(
-        null,
-        [
-          Validators.minLength(1),
-          Validators.required
-        ]
-      )
+      'aboutyou': new FormControl(null)
     });
   }
 
