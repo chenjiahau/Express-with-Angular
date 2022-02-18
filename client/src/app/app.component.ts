@@ -20,7 +20,8 @@ export class AppComponent implements OnInit {
         null,
         [
           Validators.email,
-          Validators.required
+          Validators.required,
+          this.checkEmail.bind(this)
         ]
       ),
       'firstname': new FormControl(
@@ -49,6 +50,14 @@ export class AppComponent implements OnInit {
         ]
       )
     });
+  }
+
+  checkEmail(control: FormControl): { [s: string]: boolean } {
+    if (control.value && control.value.indexOf('gmail') > -1) {
+      return { 'invalidEmail': true };
+    }
+
+    return null
   }
 
   onSubmit() {
