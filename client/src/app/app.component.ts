@@ -3,16 +3,7 @@ import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
-import { query } from '@angular/animations';
-
-interface IPost {
-  email: string;
-  firstname: string;
-  lastname: string;
-  gender: string;
-  age: string;
-  aboutyou: string;
-};
+import { IPost, ListService } from './list.service';
 
 @Component({
   selector: 'app-root',
@@ -27,7 +18,7 @@ export class AppComponent implements OnInit {
   genderList: string[];
   ageList: string[];
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient, private listService: ListService) {}
 
   ngOnInit() {
     this.genderList = ["Male", "Female"];
@@ -67,19 +58,7 @@ export class AppComponent implements OnInit {
       'aboutyou': new FormControl(null)
     });
 
-    let queryString = new HttpParams().set('action', 'get');
-    queryString = queryString.append('time', '1')
-
-    this.http.get<{ list: IPost[] }>(
-      '/api/questionnaire',
-      {
-        headers: new HttpHeaders({
-          'Custom-Header': 'Test'
-        }),
-        responseType: 'json',
-        params: queryString
-      }
-    )
+    this.listService.fetch()
       .pipe(
         map(res => {
           res.list.map(post => {
@@ -120,26 +99,14 @@ export class AppComponent implements OnInit {
 
     const postData = {
       email: this.questionnaireForm.value.email,
-      firstname: this.questionnaireForm.value.firstname,
-      lastname: this.questionnaireForm.value.lastname,
+      firstname: this.questionnaireForm.value.username.firstname,
+      lastname: this.questionnaireForm.value.username.lastname,
       gender: this.questionnaireForm.value.gender,
       age: this.questionnaireForm.value.age,
       aboutyou: this.questionnaireForm.value.aboutyou
     }
 
-    let queryString = new HttpParams().set('action', 'post');
-    queryString = queryString.append('time', '2')
-
-    this.http.post<{ message: string }>(
-      '/api/questionnaire',
-      postData,
-      {
-        headers: new HttpHeaders({
-          'Custom-Header': 'Test'
-        }),
-        params: queryString
-      }
-    )
+    this.listService.add(postData)
       .subscribe(
         (res) => {
           this.successMessage = res.message;
