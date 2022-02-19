@@ -76,6 +76,7 @@ export class AppComponent implements OnInit {
         headers: new HttpHeaders({
           'Custom-Header': 'Test'
         }),
+        responseType: 'json',
         params: queryString
       }
     )
