@@ -4,6 +4,15 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 
+interface IPost {
+  email: string;
+  firstname: string;
+  lastname: string;
+  gender: string;
+  age: string;
+  aboutyou: string;
+};
+
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
@@ -12,6 +21,7 @@ import { map } from 'rxjs/operators';
 export class AppComponent implements OnInit {
   successMessage: string;
   errorMessage: string;
+  postList: IPost[];
   questionnaireForm: FormGroup;
   genderList: string[];
   ageList: string[];
@@ -55,6 +65,17 @@ export class AppComponent implements OnInit {
       'age': new FormControl(this.ageList[1]),
       'aboutyou': new FormControl(null)
     });
+
+    this.http.get<{ list: IPost[] }>('/api/questionnaire')
+      .pipe(
+        map(res => {
+          res.list.map(post => {
+            console.log(post);
+          })
+        })
+      )
+      .subscribe(res => {
+      })
   }
 
   checkEmail(control: FormControl): { [s: string]: boolean } {
@@ -66,8 +87,8 @@ export class AppComponent implements OnInit {
   }
 
   checkUsername(control: FormControl): Observable<any> {
-    return this.http.get('/api/blockuser')
-      .pipe(map((value: any) => {
+    return this.http.get<{ list: string[] }>('/api/blockuser')
+      .pipe(map((value) => {
         let isValid = true
         value.list.map((user: string) => {
           control.value.indexOf(user) > -1 && (isValid = false);
@@ -93,9 +114,9 @@ export class AppComponent implements OnInit {
       aboutyou: this.questionnaireForm.value.aboutyou
     }
 
-    this.http.post('/api/questionnaire', postData)
+    this.http.post<{ message: string }>('/api/questionnaire', postData)
       .subscribe(
-        (res: any) => {
+        (res) => {
           this.successMessage = res.message;
           this.questionnaireForm.reset();
         },

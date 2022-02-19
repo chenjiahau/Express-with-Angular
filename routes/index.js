@@ -18,6 +18,21 @@ router.get('/api/blockuser', function(req, res, next) {
   });
 });
 
+router.get('/api/questionnaire', function (req, res, next) {
+  res.send({
+    list: [
+      {
+        email: "test@test.com",
+        firstname: 'A',
+        lastname: 'B',
+        gender: 'Male',
+        age: 'Child',
+        aboutyou: ''
+      }
+    ]
+  });
+});
+
 router.post('/api/questionnaire', function (req, res, next) {
   res.send({
     message: "Got it!"
