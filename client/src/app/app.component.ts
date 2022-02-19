@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
@@ -66,7 +66,14 @@ export class AppComponent implements OnInit {
       'aboutyou': new FormControl(null)
     });
 
-    this.http.get<{ list: IPost[] }>('/api/questionnaire')
+    this.http.get<{ list: IPost[] }>(
+      '/api/questionnaire',
+      {
+        headers: new HttpHeaders({
+          'Custom-Header': 'Test'
+        })
+      }
+    )
       .pipe(
         map(res => {
           res.list.map(post => {
@@ -114,7 +121,15 @@ export class AppComponent implements OnInit {
       aboutyou: this.questionnaireForm.value.aboutyou
     }
 
-    this.http.post<{ message: string }>('/api/questionnaire', postData)
+    this.http.post<{ message: string }>(
+      '/api/questionnaire',
+      postData,
+      {
+        headers: new HttpHeaders({
+          'Custom-Header': 'Test'
+        })
+      }
+    )
       .subscribe(
         (res) => {
           this.successMessage = res.message;
