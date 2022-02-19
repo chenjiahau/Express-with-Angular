@@ -13,9 +13,18 @@ router.get('/express-test', function(req, res, next) {
 router.get('/api/blockuser', function(req, res, next) {
   res.send({
     list: [
-      'ivan'
+      'K'
     ]
   });
+});
+
+router.post('/api/questionnaire', function (req, res, next) {
+  res.send({
+    message: "Got it!"
+  });
+  // res.status(400).send({
+  //   message: "Something wrong!"
+  // });
 });
 
 module.exports = router;

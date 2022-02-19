@@ -4,6 +4,12 @@
       <div class="questionnairy-container">
         <h1>Questionnairy</h1>
         <hr>
+        <div class="alert alert-success" *ngIf="successMessage">
+          {{successMessage}}
+        </div>
+        <div class="alert alert-danger" *ngIf="errorMessage">
+          {{errorMessage}}
+        </div>
         <form [formGroup]="questionnaireForm" (ngSubmit)="onSubmit()">
           <div class="form-group row">
             <label class="col-sm-2 col-form-label">Email</label>

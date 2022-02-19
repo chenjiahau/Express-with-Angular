@@ -10,6 +10,8 @@ import { map } from 'rxjs/operators';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent implements OnInit {
+  successMessage: string;
+  errorMessage: string;
   questionnaireForm: FormGroup;
   genderList: string[];
   ageList: string[];
@@ -56,7 +58,7 @@ export class AppComponent implements OnInit {
   }
 
   checkEmail(control: FormControl): { [s: string]: boolean } {
-    if (control.value && control.value.indexOf('gmail') > -1) {
+    if (control.value && control.value.indexOf('hotmail') > -1) {
       return { 'invalidEmail': true };
     }
 
@@ -79,7 +81,27 @@ export class AppComponent implements OnInit {
   }
 
   onSubmit() {
-    console.log(this.questionnaireForm);
-    this.questionnaireForm.reset();
+    this.successMessage = "";
+    this.errorMessage = "";
+
+    const postData = {
+      email: this.questionnaireForm.value.email,
+      firstname: this.questionnaireForm.value.firstname,
+      lastname: this.questionnaireForm.value.lastname,
+      gender: this.questionnaireForm.value.gender,
+      age: this.questionnaireForm.value.age,
+      aboutyou: this.questionnaireForm.value.aboutyou
+    }
+
+    this.http.post('/api/questionnaire', postData)
+      .subscribe(
+        (res: any) => {
+          this.successMessage = res.message;
+          this.questionnaireForm.reset();
+        },
+        (err: any) => {
+          this.errorMessage = err.error.message;
+        }
+      )
   }
 }
