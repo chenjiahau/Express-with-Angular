@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { Observable } from 'rxjs';
+import { map } from 'rxjs/operators';
 
 @Component({
   selector: 'app-root',
@@ -10,6 +13,8 @@ export class AppComponent implements OnInit {
   questionnaireForm: FormGroup;
   genderList: string[];
   ageList: string[];
+
+  constructor(private http: HttpClient) {}
 
   ngOnInit() {
     this.genderList = ["Male", "Female"];
@@ -31,7 +36,8 @@ export class AppComponent implements OnInit {
             Validators.minLength(1),
             Validators.maxLength(10),
             Validators.required
-          ]
+          ],
+          this.checkUsername.bind(this)
         ),
         'lastname': new FormControl(
           null,
@@ -39,7 +45,8 @@ export class AppComponent implements OnInit {
             Validators.minLength(1),
             Validators.maxLength(10),
             Validators.required
-          ]
+          ],
+          this.checkUsername.bind(this)
         ),
       }),
       'gender': new FormControl(this.genderList[0]),
@@ -54,6 +61,21 @@ export class AppComponent implements OnInit {
     }
 
     return null
+  }
+
+  checkUsername(control: FormControl): Observable<any> {
+    return this.http.get('/api/blockuser')
+      .pipe(map((value: any) => {
+        let isValid = true
+        value.list.map((user: string) => {
+          control.value.indexOf(user) > -1 && (isValid = false);
+        })
+
+        if (isValid)
+          return null;
+        else
+          return {invalidUsername: true}
+      }));
   }
 
   onSubmit() {

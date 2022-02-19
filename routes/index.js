@@ -10,4 +10,12 @@ router.get('/express-test', function(req, res, next) {
   res.send({ message: 'Your express is connected to react!' });
 });
 
+router.get('/api/blockuser', function(req, res, next) {
+  res.send({
+    list: [
+      'ivan'
+    ]
+  });
+});
+
 module.exports = router;
