@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
+import { query } from '@angular/animations';
 
 interface IPost {
   email: string;
@@ -66,12 +67,16 @@ export class AppComponent implements OnInit {
       'aboutyou': new FormControl(null)
     });
 
+    let queryString = new HttpParams().set('action', 'get');
+    queryString = queryString.append('time', '1')
+
     this.http.get<{ list: IPost[] }>(
       '/api/questionnaire',
       {
         headers: new HttpHeaders({
           'Custom-Header': 'Test'
-        })
+        }),
+        params: queryString
       }
     )
       .pipe(
@@ -121,13 +126,17 @@ export class AppComponent implements OnInit {
       aboutyou: this.questionnaireForm.value.aboutyou
     }
 
+    let queryString = new HttpParams().set('action', 'post');
+    queryString = queryString.append('time', '2')
+
     this.http.post<{ message: string }>(
       '/api/questionnaire',
       postData,
       {
         headers: new HttpHeaders({
           'Custom-Header': 'Test'
-        })
+        }),
+        params: queryString
       }
     )
       .subscribe(
