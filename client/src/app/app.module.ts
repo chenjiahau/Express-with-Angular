@@ -18,6 +18,7 @@ import { GreetingService } from 'src/services/greeting.service';
 import { LogService } from 'src/services/log.service';
 import { LogIntroComponent } from './log/log-intro/log-intro.component';
 import { LogDetailComponent } from './log/log-detail/log-detail.component';
+import { DatePipe } from './pipes/date.pipe';
 
 const appRoutes: Routes = [
   // An empty path is the path of every route
@@ -55,7 +56,8 @@ const appRoutes: Routes = [
     LogComponent,
     LogDetailComponent,
     NotFoundComponent,
-    LogIntroComponent
+    LogIntroComponent,
+    DatePipe
   ],
   imports: [
     BrowserModule,
