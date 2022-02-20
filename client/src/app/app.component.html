@@ -1,1 +1,40 @@
-<router-outlet></router-outlet>
+<section class="section">
+  <div>
+    <nav class="navbar" role="navigation" aria-label="main navigation">
+      <div class="navbar-brand">
+        <h1 class="title">
+          Personnel System
+        </h1>
+      </div>
+      <div class="navbar-menu">
+        <div class="navbar-start">
+          <a
+            class="navbar-item"
+            routerLinkActive="active"
+            [routerLink]="['./members']"
+          >
+            Members
+          </a>
+          <a
+            class="navbar-item"
+            routerLinkActive="active"
+            [routerLink]="['./afwork']"
+          >
+            Absence from work
+          </a>
+          <a
+            class="navbar-item"
+            routerLinkActive="active"
+            [routerLink]="['./settings']"
+          >
+            Settings
+          </a>
+        </div>
+      </div>
+    </nav>
+  </div>
+  <hr>
+  <div>
+    <router-outlet></router-outlet>
+  </div>
+</section>
