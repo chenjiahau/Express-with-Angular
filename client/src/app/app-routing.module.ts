@@ -19,9 +19,8 @@ const routes: Routes = [
       import('./settings/settings.module').then(m => m.SettingsModule)
   },
   {
-    path: '',
-    component: AppComponent,
-    pathMatch: 'full'
+    path: '**',
+    redirectTo: '/members'
   },
 ];
 
