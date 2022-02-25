@@ -111,6 +111,10 @@ export class AppComponent implements OnInit {
         (res) => {
           this.successMessage = res.message;
           this.questionnaireForm.reset();
+          this.questionnaireForm.patchValue({
+            gender: this.genderList[0],
+            age: this.ageList[1],
+          });
         },
         (err: any) => {
           this.errorMessage = err.error.message;
