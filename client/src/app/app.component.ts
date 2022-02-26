@@ -70,6 +70,18 @@ export class AppComponent implements OnInit {
       })
   }
 
+  get email() {
+    return this.questionnaireForm.get('email')
+  }
+
+  get firstname() {
+    return this.questionnaireForm.get('username.firstname')
+  }
+
+  get lastname() {
+    return this.questionnaireForm.get('username.lastname')
+  }
+
   checkEmail(control: FormControl): { [s: string]: boolean } {
     if (control.value && control.value.indexOf('hotmail') > -1) {
       return { 'invalidEmail': true };
