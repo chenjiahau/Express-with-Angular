@@ -30,7 +30,7 @@ export class AppComponent implements OnInit {
         [
           Validators.email,
           Validators.required,
-          this.checkEmail.bind(this)
+          this.checkEmail(['gmail', 'hotmail'])
         ]
       ),
       'username': new FormGroup({
@@ -82,12 +82,18 @@ export class AppComponent implements OnInit {
     return this.questionnaireForm.get('username.lastname')
   }
 
-  checkEmail(control: FormControl): { [s: string]: boolean } {
-    if (control.value && control.value.indexOf('hotmail') > -1) {
-      return { 'invalidEmail': true };
-    }
+  checkEmail(restrictedISPList: string[]) {
+    return (control: FormControl): { [s: string]: boolean } => {
+      if (control.value) {
+        for (let restrictedISP of restrictedISPList) {
+          if (control.value.indexOf(restrictedISP) > -1) {
+            return { 'invalidEmail': true };
+          }
+        }
+      }
 
-    return null
+      return null
+    }
   }
 
   checkUsername(control: FormControl): Observable<any> {
