@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { Observable } from 'rxjs';
-import { map } from 'rxjs/operators';
+import { Observable, of } from 'rxjs';
+import { catchError, map } from 'rxjs/operators';
 import { IPost, ListService } from './list.service';
 
 @Component({
@@ -101,17 +101,22 @@ export class AppComponent implements OnInit {
 
   checkUsername(control: FormControl): Observable<any> {
     return this.http.get<{ list: string[] }>('/api/blockuser')
-      .pipe(map((value) => {
-        let isValid = true
-        value.list.map((user: string) => {
-          control.value.indexOf(user) > -1 && (isValid = false);
-        })
+      .pipe(
+        map((value) => {
+          let isValid = true
+          value.list.map((user: string) => {
+            control.value.indexOf(user) > -1 && (isValid = false);
+          })
 
-        if (isValid)
-          return null;
-        else
-          return {invalidUsername: true}
-      }));
+          if (isValid)
+            return null;
+          else
+            return { invalidUsername: true }
+        }),
+        catchError((err: any) => {
+          return of({ invalidUsername: true });
+        })
+      );
   }
 
   onSubmit() {
