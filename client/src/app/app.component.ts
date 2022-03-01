@@ -36,12 +36,15 @@ export class AppComponent implements OnInit {
       'username': new FormGroup({
         'firstname': new FormControl(
           null,
-          [
-            Validators.minLength(1),
-            Validators.maxLength(10),
-            Validators.required
-          ],
-          this.checkUsername.bind(this)
+          {
+            validators: [
+              Validators.minLength(1),
+              Validators.maxLength(10),
+              Validators.required
+            ],
+            asyncValidators: this.checkUsername.bind(this),
+            updateOn: 'blur'
+          }
         ),
         'lastname': new FormControl(
           null,
