@@ -40,6 +40,7 @@ export class AppComponent implements OnInit {
             validators: [
               Validators.minLength(1),
               Validators.maxLength(10),
+              Validators.pattern('^[a-zA-Z]*$'),
               Validators.required
             ],
             asyncValidators: this.checkUsername.bind(this),
