@@ -4,6 +4,7 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Observable, of } from 'rxjs';
 import { catchError, map } from 'rxjs/operators';
 import { IPost, ListService } from './list.service';
+import { GlobalValidator } from './global-validator';
 
 @Component({
   selector: 'app-root',
@@ -18,49 +19,58 @@ export class AppComponent implements OnInit {
   genderList: string[];
   ageList: string[];
 
-  constructor(private http: HttpClient, private listService: ListService) {}
+  constructor(
+    private http: HttpClient,
+    private listService: ListService,
+    private globalValidator: GlobalValidator
+  ) { }
 
   ngOnInit() {
     this.genderList = ["Male", "Female"];
     this.ageList = ["Child", "Teenager", "Young", "Old"];
 
-    this.questionnaireForm = new FormGroup({
-      'email': new FormControl(
-        null,
-        [
-          Validators.email,
-          Validators.required,
-          this.checkEmail(['gmail', 'hotmail'])
-        ]
-      ),
-      'username': new FormGroup({
-        'firstname': new FormControl(
-          null,
-          {
-            validators: [
-              Validators.minLength(1),
-              Validators.maxLength(10),
-              Validators.pattern('^[a-zA-Z]*$'),
-              Validators.required
-            ],
-            asyncValidators: this.checkUsername.bind(this),
-            updateOn: 'blur'
-          }
-        ),
-        'lastname': new FormControl(
+    this.questionnaireForm = new FormGroup(
+      {
+        'email': new FormControl(
           null,
           [
-            Validators.minLength(1),
-            Validators.maxLength(10),
-            Validators.required
-          ],
-          this.checkUsername.bind(this)
+            Validators.email,
+            Validators.required,
+            this.checkEmail(['gmail', 'hotmail'])
+          ]
         ),
-      }),
-      'gender': new FormControl(this.genderList[0]),
-      'age': new FormControl(this.ageList[1]),
-      'aboutyou': new FormControl(null)
-    });
+        'username': new FormGroup({
+          'firstname': new FormControl(
+            null,
+            {
+              validators: [
+                Validators.minLength(1),
+                Validators.maxLength(10),
+                Validators.pattern('^[a-zA-Z]*$'),
+                Validators.required
+              ],
+              asyncValidators: this.checkUsername.bind(this),
+              updateOn: 'blur'
+            }
+          ),
+          'lastname': new FormControl(
+            null,
+            [
+              Validators.minLength(1),
+              Validators.maxLength(10),
+              Validators.required
+            ],
+            this.checkUsername.bind(this)
+          ),
+        }),
+        'gender': new FormControl(this.genderList[0]),
+        'age': new FormControl(this.ageList[1]),
+        'aboutyou': new FormControl(null)
+      },
+      {
+        validators: [ this.globalValidator.validate ]
+      }
+    );
 
     this.listService.fetch()
       .pipe(

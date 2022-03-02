@@ -4,6 +4,9 @@
       <div class="questionnairy-container">
         <h1>Questionnairy</h1>
         <hr>
+        <div class="alert alert-danger" *ngIf="questionnaireForm.errors">
+          {{'Something Wrong!'}}
+        </div>
         <div class="alert alert-success" *ngIf="successMessage">
           {{successMessage}}
         </div>
