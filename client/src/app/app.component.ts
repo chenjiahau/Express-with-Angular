@@ -1,10 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { Observable, of } from 'rxjs';
-import { catchError, map } from 'rxjs/operators';
+import { map } from 'rxjs/operators';
 import { IPost, ListService } from './list.service';
 import { GlobalValidator } from './global-validator';
+import { ForbiddenWord } from './forbidden-word';
 
 @Component({
   selector: 'app-root',
@@ -20,9 +19,9 @@ export class AppComponent implements OnInit {
   ageList: string[];
 
   constructor(
-    private http: HttpClient,
     private listService: ListService,
-    private globalValidator: GlobalValidator
+    private globalValidator: GlobalValidator,
+    private forbiddenWords: ForbiddenWord
   ) { }
 
   ngOnInit() {
@@ -49,19 +48,23 @@ export class AppComponent implements OnInit {
                 Validators.pattern('^[a-zA-Z]*$'),
                 Validators.required
               ],
-              asyncValidators: this.checkUsername.bind(this),
+              asyncValidators: this.forbiddenWords.validate,
               updateOn: 'blur'
             }
           ),
           'lastname': new FormControl(
             null,
-            [
-              Validators.minLength(1),
-              Validators.maxLength(10),
-              Validators.required
-            ],
-            this.checkUsername.bind(this)
-          ),
+            {
+              validators: [
+                Validators.minLength(1),
+                Validators.maxLength(10),
+                Validators.pattern('^[a-zA-Z]*$'),
+                Validators.required
+              ],
+              asyncValidators: this.forbiddenWords.validate,
+              updateOn: 'blur'
+            }
+          )
         }),
         'gender': new FormControl(this.genderList[0]),
         'age': new FormControl(this.ageList[1]),
@@ -108,26 +111,6 @@ export class AppComponent implements OnInit {
 
       return null
     }
-  }
-
-  checkUsername(control: FormControl): Observable<any> {
-    return this.http.get<{ list: string[] }>('/api/blockuser')
-      .pipe(
-        map((value) => {
-          let isValid = true
-          value.list.map((user: string) => {
-            control.value.indexOf(user) > -1 && (isValid = false);
-          })
-
-          if (isValid)
-            return null;
-          else
-            return { invalidUsername: true }
-        }),
-        catchError((err: any) => {
-          return of({ invalidUsername: true });
-        })
-      );
   }
 
   onSubmit() {
