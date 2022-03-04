@@ -1,6 +1,7 @@
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import { BehaviorSubject, Observable } from 'rxjs';
+import { tap } from 'rxjs/operators';
 
 export interface IPost {
   email: string;
@@ -15,6 +16,7 @@ export interface IPost {
   providedIn: 'root'
 })
 export class ListService {
+  hasJoined = new BehaviorSubject(false);
 
   constructor(private http: HttpClient) { }
 
@@ -38,15 +40,21 @@ export class ListService {
     let queryString = new HttpParams().set('action', 'post');
     queryString = queryString.append('time', '2')
  
-    return this.http.post<{ message: string }>(
-      '/api/questionnaire',
-      postData,
-      {
-        headers: new HttpHeaders({
-          'Custom-Header': 'Test'
-        }),
-        params: queryString
-      }
-    )
+    return this.http
+      .post<{ message: string }>(
+        '/api/questionnaire',
+        postData,
+        {
+          headers: new HttpHeaders({
+            'Custom-Header': 'Test'
+          }),
+          params: queryString
+        }
+      )
+      .pipe(
+        tap(() => {
+          this.hasJoined.next(true);
+        })
+      )
   }
 }
