@@ -7,7 +7,7 @@ import { catchError, map } from "rxjs/operators";
 @Injectable({
   providedIn: 'root'
 })
-export class ForbiddenWord implements AsyncValidator {
+export class ForbiddenWordValidator implements AsyncValidator {
   constructor(private http: HttpClient) { }
 
   validate = (control: FormControl) => {

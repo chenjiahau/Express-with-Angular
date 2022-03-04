@@ -1,9 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { map } from 'rxjs/operators';
-import { IPost, ListService } from './list.service';
-import { GlobalValidator } from './global-validator';
-import { ForbiddenWord } from './forbidden-word';
+import { IPost, ListService } from './services/list.service';
+import { GlobalValidator } from './validators/global.validator';
+import { AllowEmailValidator } from './validators/allow-email.validator';
+import { ForbiddenWordValidator } from './validators/forbidden-word.validator';
 
 @Component({
   selector: 'app-root',
@@ -21,7 +22,8 @@ export class AppComponent implements OnInit {
   constructor(
     private listService: ListService,
     private globalValidator: GlobalValidator,
-    private forbiddenWords: ForbiddenWord
+    private allowEmailValidator: AllowEmailValidator,
+    private forbiddenWordsValidator: ForbiddenWordValidator
   ) { }
 
   ngOnInit() {
@@ -32,11 +34,15 @@ export class AppComponent implements OnInit {
       {
         'email': new FormControl(
           null,
-          [
-            Validators.email,
-            Validators.required,
-            this.checkEmail(['gmail', 'hotmail'])
-          ]
+          {
+            validators: [
+              Validators.email,
+              Validators.required,
+              this.allowEmailValidator.validate
+            ],
+            asyncValidators: null,
+            updateOn: 'blur'
+          }
         ),
         'username': new FormGroup({
           'firstname': new FormControl(
@@ -48,7 +54,7 @@ export class AppComponent implements OnInit {
                 Validators.pattern('^[a-zA-Z]*$'),
                 Validators.required
               ],
-              asyncValidators: this.forbiddenWords.validate,
+              asyncValidators: this.forbiddenWordsValidator.validate,
               updateOn: 'blur'
             }
           ),
@@ -61,7 +67,7 @@ export class AppComponent implements OnInit {
                 Validators.pattern('^[a-zA-Z]*$'),
                 Validators.required
               ],
-              asyncValidators: this.forbiddenWords.validate,
+              asyncValidators: this.forbiddenWordsValidator.validate,
               updateOn: 'blur'
             }
           )
@@ -79,7 +85,7 @@ export class AppComponent implements OnInit {
       .pipe(
         map(res => {
           res.list.map(post => {
-            console.log(post);
+            // console.log(post);
           })
         })
       )
@@ -97,20 +103,6 @@ export class AppComponent implements OnInit {
 
   get lastname() {
     return this.questionnaireForm.get('username.lastname')
-  }
-
-  checkEmail(restrictedISPList: string[]) {
-    return (control: FormControl): { [s: string]: boolean } => {
-      if (control.value) {
-        for (let restrictedISP of restrictedISPList) {
-          if (control.value.indexOf(restrictedISP) > -1) {
-            return { 'invalidEmail': true };
-          }
-        }
-      }
-
-      return null
-    }
   }
 
   onSubmit() {
