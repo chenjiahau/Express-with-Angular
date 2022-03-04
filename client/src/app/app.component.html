@@ -5,7 +5,9 @@
         <h1>Questionnairy</h1>
         <hr>
         <div class="alert alert-danger" *ngIf="questionnaireForm.errors">
-          {{'Something Wrong!'}}
+          <span *ngIf="questionnaireForm.errors.invalidUsername">
+            {{'First name can\'t be equal last name!'}}
+          </span>
         </div>
         <div class="alert alert-success" *ngIf="successMessage">
           {{successMessage}}

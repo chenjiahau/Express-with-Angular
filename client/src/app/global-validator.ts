@@ -10,7 +10,7 @@ export class GlobalValidator implements Validator {
     const { firstname, lastname } = formGroup.value.username;
 
     if (formGroup.touched && firstname === lastname) {
-      return { 'somethingWrong': true }
+      return { 'invalidUsername': true }
     }
 
     return null;
