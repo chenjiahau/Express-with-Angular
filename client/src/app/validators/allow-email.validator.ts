@@ -5,7 +5,7 @@ import { FormControl, Validator } from "@angular/forms";
   providedIn: 'root'
 })
 export class AllowEmailValidator implements Validator {
-  restrictedISPList: string[] = ['gmail', 'hotmail'];
+  restrictedISPList: string[] = ['gmail'];
 
   validate = (formControl: FormControl) => {
     if (formControl.value) {

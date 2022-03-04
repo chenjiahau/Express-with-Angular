@@ -1,0 +1,136 @@
+<div class="container">
+  <div class="row">
+    <div class="col-md-12">
+      <div class="questionnairy-container">
+        <h1>Questionnairy</h1>
+        <hr>
+        <div class="alert alert-danger" *ngIf="questionnaireForm.errors">
+          <span *ngIf="questionnaireForm.errors.invalidUsername">
+            {{'First name can\'t be equal last name!'}}
+          </span>
+        </div>
+        <div class="alert alert-success" *ngIf="successMessage">
+          {{successMessage}}
+        </div>
+        <div class="alert alert-danger" *ngIf="errorMessage">
+          {{errorMessage}}
+        </div>
+        <form [formGroup]="questionnaireForm" (ngSubmit)="onSubmit()">
+          <div class="form-group row">
+            <label class="col-sm-2 col-form-label">Email</label>
+            <div class="col-sm-10">
+              <input
+                appFormStatus
+                type="email"
+                class="form-control"
+                name="email"
+                formControlName="email"
+              >
+            </div>
+          </div>
+          <div class="form-group row" *ngIf="email.touched && !email.valid">
+            <label class="col-sm-2 col-form-label"></label>
+            <div class="col-sm-10">
+              <div class="col-sm-12 alert alert-danger" role="alert">Invalid e-mail</div>
+            </div>
+          </div>
+          <ng-container formGroupName="username">
+            <div class="form-group row">
+              <label class="col-sm-2 col-form-label">Firstname</label>
+              <div class="col-sm-10">
+                <input
+                  appFormStatus
+                  type="firstname"
+                  class="form-control"
+                  name="firstname"
+                  formControlName="firstname"
+                >
+              </div>
+            </div>
+            <div class="form-group row" *ngIf="firstname.touched && !firstname.valid">
+              <label class="col-sm-2 col-form-label"></label>
+              <div class="col-sm-10">
+                <div class="col-sm-12 alert alert-danger" role="alert">Invalid first name</div>
+              </div>
+            </div>
+            <div class="form-group row">
+              <label class="col-sm-2 col-form-label">Lastname</label>
+              <div class="col-sm-10">
+                <input
+                  appFormStatus
+                  type="type"
+                  class="form-control"
+                  name="lastname"
+                  formControlName="lastname"
+                >
+              </div>
+            </div>
+            <div class="form-group row" *ngIf="lastname.touched && !lastname.valid">
+              <label class="col-sm-2 col-form-label"></label>
+              <div class="col-sm-10">
+                <div class="col-sm-12 alert alert-danger" role="alert">Invalid last name</div>
+              </div>
+            </div>
+          </ng-container>
+          <div class="form-group row">
+            <label class="col-sm-2 col-form-label">Gender</label>
+            <div class="col-sm-10">
+              <select
+                class="form-control"
+                name="gender"
+                formControlName="gender"
+              >
+                <option selected>Choose...</option>
+                <option
+                  *ngFor="let gender of genderList"
+                  [ngValue]="gender"
+                >
+                  {{gender}}
+                </option>
+              </select>
+            </div>
+          </div>
+          <fieldset class="form-group row">
+            <legend class="col-form-label col-sm-2 float-sm-left pt-0">Age</legend>
+            <div class="col-sm-10">
+              <div
+                class="form-check"
+                *ngFor="let age of ageList"
+              >
+                <input
+                  class="form-check-input"
+                  type="radio"
+                  name="age"
+                  formControlName="age"
+                  [value]="age"
+                >
+                <label class="form-check-label">
+                  {{age}}
+                </label>
+              </div>
+            </div>
+          </fieldset>
+          <div class="form-group row">
+            <label class="col-sm-2 col-form-label">About yourself</label>
+            <div class="col-sm-10">
+              <textarea
+                class="form-control"
+                name="aboutyou"
+                formControlName="aboutyou"
+              ></textarea>
+            </div>
+          </div>
+          <div class="form-group">
+            <div class="text-right">
+              <button
+                type="submit"
+                class="btn btn-primary"
+                [disabled]="!questionnaireForm.valid"
+              >Post</button>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
