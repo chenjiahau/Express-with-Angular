@@ -1,9 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { map } from 'rxjs/operators';
 
-import { IPost, ListService } from '../../../services/list.service';
+import { ListService } from '../../../services/list.service';
 import { GlobalValidator } from '../../../validators/global.validator';
 import { AllowEmailValidator } from '../../../validators/allow-email.validator';
 import { ForbiddenWordValidator } from '../../../validators/forbidden-word.validator';
@@ -16,7 +15,6 @@ import { ForbiddenWordValidator } from '../../../validators/forbidden-word.valid
 export class QuestionnaireComponent implements OnInit {
   successMessage: string;
   errorMessage: string;
-  postList: IPost[];
   questionnaireForm: FormGroup;
   genderList: string[];
   ageList: string[];
@@ -83,17 +81,6 @@ export class QuestionnaireComponent implements OnInit {
         validators: [ this.globalValidator.validate ]
       }
     );
-
-    this.listService.fetch()
-      .pipe(
-        map(res => {
-          res.list.map(post => {
-            // console.log(post);
-          })
-        })
-      )
-      .subscribe(res => {
-      })
   }
 
   get email() {

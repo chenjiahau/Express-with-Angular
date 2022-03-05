@@ -15,17 +15,18 @@ import { AppComponent } from './app.component';
 import { QuestionnaireComponent } from './components/questionnaire/questionnaire/questionnaire.component';
 import { SuccessMessageComponent } from './components/success-message/success-message/success-message.component';
 import { ListGuardService } from './modules/list/components/services/list-guard.service';
+import { DirectivesDirective } from './directives.directive';
 
 const appRoutes: Routes = [
   { path: '', component: QuestionnaireComponent, pathMatch: 'full' },
   {
     path: 'success',
-    canActivate: [SuccessGuardService],
+    // canActivate: [SuccessGuardService],
     component: SuccessMessageComponent,
   },
   {
     path: 'list',
-    canLoad: [ListGuardService],
+    // canLoad: [ListGuardService],
     loadChildren: () =>
       import('./modules/list/list.module').then(m => m.ListModule)
   }
@@ -36,7 +37,8 @@ const appRoutes: Routes = [
     AppComponent,
     FormStatusDirective,
     QuestionnaireComponent,
-    SuccessMessageComponent
+    SuccessMessageComponent,
+    DirectivesDirective
   ],
   imports: [
     BrowserModule,

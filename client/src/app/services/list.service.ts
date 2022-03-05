@@ -1,9 +1,10 @@
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
-import { tap } from 'rxjs/operators';
+import { pluck, tap } from 'rxjs/operators';
 
 export interface IPost {
+  id: number;
   email: string;
   firstname: string;
   lastname: string;
@@ -24,16 +25,26 @@ export class ListService {
     let queryString = new HttpParams().set('action', 'get');
     queryString = queryString.append('time', '1')
 
-    return this.http.get<{ list: IPost[] }>(
-      '/api/questionnaire',
-      {
-        headers: new HttpHeaders({
+    return this.http
+      .get<{ list: IPost[] }>(
+        '/api/questionnaire',
+        {
+          headers: new HttpHeaders({
           'Custom-Header': 'Test'
-        }),
-        responseType: 'json',
-        params: queryString
-      }
-    );
+          }),
+          responseType: 'json',
+          params: queryString
+        }
+      )
+      .pipe(
+        pluck('list'),
+        tap(items => {
+          const postList: IPost[] = [];
+          items.map((item: IPost) => postList.push(item));
+
+          return postList;
+        })
+      )
   }
 
   add(postData: IPost): Observable<any> {

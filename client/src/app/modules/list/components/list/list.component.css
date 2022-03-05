@@ -1,0 +1,53 @@
+.container {
+  margin-top: 22px;
+}
+
+.post-header, .post-body {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  color: white;
+}
+
+.post-id {
+  width: 60px;
+  text-align: center;
+}
+
+.post-email, .post-username {
+  flex: 1;
+}
+
+.post-header {
+  margin-bottom: 22px;
+}
+
+.post-header > .post-id,
+.post-header > .post-email,
+.post-header > .post-username {
+  margin: 2px 8px 2px 0;
+  padding: 12px;
+  border-radius: 32px;
+  background-color: green;
+  font-weight: bold;
+  font-size: 18px;
+}
+
+.post-body > .post-id,
+.post-body > .post-email,
+.post-body > .post-username {
+  margin: 2px 8px 8px 0;
+  padding: 4px 12px 4px 12px;
+  color: black;
+  border: none;
+  border-radius: 32px;
+  box-shadow: 2px 2px 2px #eeeeee;
+  cursor: pointer;
+  font-size: 14px;
+}
+
+.post-body > .post-id:hover,
+.post-body > .post-email:hover,
+.post-body > .post-username:hover {
+  background-color: gold;
+}

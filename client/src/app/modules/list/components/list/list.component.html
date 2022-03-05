@@ -1,9 +1,17 @@
 <div class="container">
   <div class="row">
     <div class="col-md-12">
-      <div class="questionnaire-container">
-        <h1>Questionnaire List</h1>
-        <hr>
+      <h1>Questionnaire List</h1>
+      <hr>
+      <div class="post-header">
+        <div class="post-id">ID</div>
+        <div class="post-email">First name</div>
+        <div class="post-username">Last name</div>
+      </div>
+      <div class="post-body" *ngFor="let post of postList;let i = index">
+        <div class="post-id">{{i + 1}}</div>
+        <div class="post-email">{{post.email}}</div>
+        <div class="post-username">{{post.firstname}} {{post.lastname}}</div>
       </div>
     </div>
   </div>
