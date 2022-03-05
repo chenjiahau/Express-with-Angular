@@ -12,11 +12,11 @@ import { FormStatusDirective } from './directives/form-status.directive';
 import { SuccessGuardService } from './services/success-guard.service';
 
 import { AppComponent } from './app.component';
-import { QuestionnairComponent } from './components/questionnair/questionnair/questionnair.component';
+import { QuestionnaireComponent } from './components/questionnaire/questionnaire/questionnaire.component';
 import { SuccessMessageComponent } from './components/success-message/success-message/success-message.component';
 
 const appRoutes: Routes = [
-  { path: '', component: QuestionnairComponent, pathMatch: 'full' },
+  { path: '', component: QuestionnaireComponent, pathMatch: 'full' },
   {
     path: 'success',
     canActivate: [SuccessGuardService],
@@ -28,7 +28,7 @@ const appRoutes: Routes = [
   declarations: [
     AppComponent,
     FormStatusDirective,
-    QuestionnairComponent,
+    QuestionnaireComponent,
     SuccessMessageComponent
   ],
   imports: [

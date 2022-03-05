@@ -9,11 +9,11 @@ import { AllowEmailValidator } from '../../../validators/allow-email.validator';
 import { ForbiddenWordValidator } from '../../../validators/forbidden-word.validator';
 
 @Component({
-  selector: 'app-questionnair',
-  templateUrl: './questionnair.component.html',
-  styleUrls: ['./questionnair.component.css']
+  selector: 'app-questionnaire',
+  templateUrl: './questionnaire.component.html',
+  styleUrls: ['./questionnaire.component.css']
 })
-export class QuestionnairComponent implements OnInit {
+export class QuestionnaireComponent implements OnInit {
   successMessage: string;
   errorMessage: string;
   postList: IPost[];
