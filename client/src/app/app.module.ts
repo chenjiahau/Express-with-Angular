@@ -16,6 +16,7 @@ import { QuestionnaireComponent } from './components/questionnaire/questionnaire
 import { SuccessMessageComponent } from './components/success-message/success-message/success-message.component';
 import { ListGuardService } from './modules/list/components/services/list-guard.service';
 import { DirectivesDirective } from './directives.directive';
+import { ModalComponent } from './components/share/modal/modal.component';
 
 const appRoutes: Routes = [
   { path: '', component: QuestionnaireComponent, pathMatch: 'full' },
@@ -38,7 +39,8 @@ const appRoutes: Routes = [
     FormStatusDirective,
     QuestionnaireComponent,
     SuccessMessageComponent,
-    DirectivesDirective
+    DirectivesDirective,
+    ModalComponent
   ],
   imports: [
     BrowserModule,

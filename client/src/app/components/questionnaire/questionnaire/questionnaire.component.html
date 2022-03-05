@@ -17,8 +17,11 @@
         </div>
         <form [formGroup]="questionnaireForm" (ngSubmit)="onSubmit()">
           <div class="form-group row">
-            <label class="col-sm-2 col-form-label">Email</label>
-            <div class="col-sm-10">
+            <label class="col-sm-4 col-form-label">
+              Email
+              <div class="btn btn-primary tip" (mouseover)="showPopup('email')">?</div>
+            </label>
+            <div class="col-sm-8">
               <input
                 appFormStatus
                 type="email"
@@ -29,15 +32,18 @@
             </div>
           </div>
           <div class="form-group row" *ngIf="email.touched && !email.valid">
-            <label class="col-sm-2 col-form-label"></label>
-            <div class="col-sm-10">
+            <label class="col-sm-4 col-form-label"></label>
+            <div class="col-sm-8">
               <div class="col-sm-12 alert alert-danger" role="alert">Invalid e-mail</div>
             </div>
           </div>
           <ng-container formGroupName="username">
             <div class="form-group row">
-              <label class="col-sm-2 col-form-label">Firstname</label>
-              <div class="col-sm-10">
+              <label class="col-sm-4 col-form-label">
+                Firstname
+                <div class="btn btn-primary tip" (mouseover)="showPopup('username')">?</div>
+              </label>
+              <div class="col-sm-8">
                 <input
                   appFormStatus
                   type="firstname"
@@ -48,14 +54,17 @@
               </div>
             </div>
             <div class="form-group row" *ngIf="firstname.touched && !firstname.valid">
-              <label class="col-sm-2 col-form-label"></label>
-              <div class="col-sm-10">
+              <label class="col-sm-4 col-form-label"></label>
+              <div class="col-sm-8">
                 <div class="col-sm-12 alert alert-danger" role="alert">Invalid first name</div>
               </div>
             </div>
             <div class="form-group row">
-              <label class="col-sm-2 col-form-label">Lastname</label>
-              <div class="col-sm-10">
+              <label class="col-sm-4 col-form-label">
+                Lastname
+                <div class="btn btn-primary tip" (mouseover)="showPopup('username')">?</div>
+              </label>
+              <div class="col-sm-8">
                 <input
                   appFormStatus
                   type="type"
@@ -66,15 +75,15 @@
               </div>
             </div>
             <div class="form-group row" *ngIf="lastname.touched && !lastname.valid">
-              <label class="col-sm-2 col-form-label"></label>
-              <div class="col-sm-10">
+              <label class="col-sm-4 col-form-label"></label>
+              <div class="col-sm-8">
                 <div class="col-sm-12 alert alert-danger" role="alert">Invalid last name</div>
               </div>
             </div>
           </ng-container>
           <div class="form-group row">
-            <label class="col-sm-2 col-form-label">Gender</label>
-            <div class="col-sm-10">
+            <label class="col-sm-4 col-form-label">Gender</label>
+            <div class="col-sm-8">
               <select
                 class="form-control"
                 name="gender"
@@ -91,8 +100,8 @@
             </div>
           </div>
           <fieldset class="form-group row">
-            <legend class="col-form-label col-sm-2 float-sm-left pt-0">Age</legend>
-            <div class="col-sm-10">
+            <legend class="col-form-label col-sm-4 float-sm-left pt-0">Age</legend>
+            <div class="col-sm-8">
               <div
                 class="form-check"
                 *ngFor="let age of ageList"
@@ -111,8 +120,8 @@
             </div>
           </fieldset>
           <div class="form-group row">
-            <label class="col-sm-2 col-form-label">About yourself</label>
-            <div class="col-sm-10">
+            <label class="col-sm-4 col-form-label">About yourself</label>
+            <div class="col-sm-8">
               <textarea
                 class="form-control"
                 name="aboutyou"
@@ -134,3 +143,13 @@
     </div>
   </div>
 </div>
+
+<app-modal
+  [show]="tip.show"
+  (dismiss)="closePopup($event)"
+>
+  <div title>{{tip.title}}</div>
+  <div content>
+    <p>{{tip.content}}</p>
+  </div>
+</app-modal>

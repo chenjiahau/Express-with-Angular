@@ -18,6 +18,7 @@ export class QuestionnaireComponent implements OnInit {
   questionnaireForm: FormGroup;
   genderList: string[];
   ageList: string[];
+  tip: { show: boolean; title: string; content: string; }
 
   constructor(
     private router: Router,
@@ -25,7 +26,7 @@ export class QuestionnaireComponent implements OnInit {
     private globalValidator: GlobalValidator,
     private allowEmailValidator: AllowEmailValidator,
     private forbiddenWordsValidator: ForbiddenWordValidator
-  ) { }
+  ) {}
 
   ngOnInit() {
     this.genderList = ["Male", "Female"];
@@ -81,6 +82,12 @@ export class QuestionnaireComponent implements OnInit {
         validators: [ this.globalValidator.validate ]
       }
     );
+
+    this.tip = {
+      show: false,
+      title: null,
+      content: null
+    }
   }
 
   get email() {
@@ -93,6 +100,26 @@ export class QuestionnaireComponent implements OnInit {
 
   get lastname() {
     return this.questionnaireForm.get('username.lastname')
+  }
+
+  showPopup(where: string) {
+    setTimeout(() => {
+      this.tip.show = true;
+
+      if (where === 'email') {
+        this.tip.title = 'About Email';
+        this.tip.content = 'Forbid ISP from Gmail';
+      }
+
+      if (where === 'username') {
+        this.tip.title = 'About Usernmae';
+        this.tip.content = 'Username cannot be equal with lastname';
+      }
+    }, 100);
+  }
+
+  closePopup(where: string) {
+    this.tip.show = false;
   }
 
   onSubmit() {
