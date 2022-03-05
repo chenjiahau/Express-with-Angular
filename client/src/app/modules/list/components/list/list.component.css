@@ -45,9 +45,3 @@
   cursor: pointer;
   font-size: 14px;
 }
-
-.post-body > .post-id:hover,
-.post-body > .post-email:hover,
-.post-body > .post-username:hover {
-  background-color: gold;
-}

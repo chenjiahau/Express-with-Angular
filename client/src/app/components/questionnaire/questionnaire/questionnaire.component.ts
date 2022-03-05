@@ -100,6 +100,7 @@ export class QuestionnaireComponent implements OnInit {
     this.errorMessage = "";
 
     const postData = {
+      id: null,
       email: this.questionnaireForm.value.email,
       firstname: this.questionnaireForm.value.username.firstname,
       lastname: this.questionnaireForm.value.username.lastname,

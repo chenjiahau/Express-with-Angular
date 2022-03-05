@@ -9,9 +9,9 @@
         <div class="post-username">Last name</div>
       </div>
       <div class="post-body" *ngFor="let post of postList;let i = index">
-        <div class="post-id">{{i + 1}}</div>
-        <div class="post-email">{{post.email}}</div>
-        <div class="post-username">{{post.firstname}} {{post.lastname}}</div>
+        <div class="post-id" appHover [index]="i">{{i + 1}}</div>
+        <div class="post-email" appHover [index]="i">{{post.email}}</div>
+        <div class="post-username" appHover [index]="i">{{post.firstname}} {{post.lastname}}</div>
       </div>
     </div>
   </div>
