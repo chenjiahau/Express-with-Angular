@@ -4,7 +4,11 @@
   role="dialog"
   [ngStyle]="{display: show ? 'block' : 'none'}"
 >
-  <div class="modal-dialog" role="document">
+  <div
+    class="modal-dialog"
+    role="document"
+    (click)="$event.preventDefault();"
+  >
     <div class="modal-content">
       <div class="modal-header">
         <h4 class="modal-title">
@@ -15,13 +19,16 @@
         <ng-content select="[content]"></ng-content>
       </div>
       <div class="modal-footer">
-        <button
-          type="button"
-          class="btn btn-primary" 
-          (click)="closePopup()"
-        >
-          Close
-        </button>
+        <div>
+          <button
+            type="button"
+            class="btn btn-danger" 
+            (click)="closePopup()"
+          >
+            Cancel
+          </button>
+        </div>
+        <ng-content select="[button]"></ng-content>
       </div>
     </div>
   </div>

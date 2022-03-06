@@ -146,10 +146,19 @@
 
 <app-modal
   [show]="tip.show"
-  (dismiss)="closePopup($event)"
+  (dismiss)="closePopup($event);"
 >
   <div title>{{tip.title}}</div>
   <div content>
     <p>{{tip.content}}</p>
+  </div>
+  <div button>
+    <button
+      type="button"
+      class="btn btn-primary" 
+      (click)="closePopup($event)"
+    >
+      Agree
+    </button>
   </div>
 </app-modal>
