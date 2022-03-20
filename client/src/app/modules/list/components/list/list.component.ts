@@ -2,8 +2,10 @@ import { Component, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
 
 import { ListService } from '../../../../services/list.service';
-import { QuestionnaireState } from '../../../../store/reducers/Questionnaire.reducer';
+
+import * as fromApp from '../../../../store/reducers/App.reducer';
 import * as QuestionnaireActions from '../../../../store/actions/Questionnaire.action';
+
 import { Questionnaire } from '../../../../models/Questionnaire.model';
 
 @Component({
@@ -17,7 +19,7 @@ export class ListComponent implements OnInit {
 
   constructor(
     private listService: ListService,
-    private store: Store<{ questionnaire: QuestionnaireState}>
+    private store: Store<fromApp.AppState>
   ) { }
 
   ngOnInit(): void {

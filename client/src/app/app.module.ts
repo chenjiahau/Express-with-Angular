@@ -20,7 +20,7 @@ import { ListGuardService } from './modules/list/components/services/list-guard.
 import { DirectivesDirective } from './directives.directive';
 import { ModalComponent } from './components/share/modal/modal.component';
 
-import { questionnaireReducer } from './store/reducers/Questionnaire.reducer';
+import { appReducer } from './store/reducers/App.reducer';
 
 const appRoutes: Routes = [
   { path: '', component: QuestionnaireComponent, pathMatch: 'full' },
@@ -52,7 +52,7 @@ const appRoutes: Routes = [
     HttpClientModule,
     ReactiveFormsModule,
     RouterModule.forRoot(appRoutes),
-    StoreModule.forRoot({questionnaire: questionnaireReducer}),
+    StoreModule.forRoot(appReducer),
   ],
   providers: [
     {

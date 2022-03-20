@@ -9,7 +9,7 @@ import { GlobalValidator } from '../../../validators/global.validator';
 import { AllowEmailValidator } from '../../../validators/allow-email.validator';
 import { ForbiddenWordValidator } from '../../../validators/forbidden-word.validator';
 
-import { QuestionnaireState } from '../../../store/reducers/Questionnaire.reducer';
+import * as fromApp from '../../../store/reducers/App.reducer';
 import * as QuestionnaireActions from '../../../store/actions/Questionnaire.action';
 
 @Component({
@@ -33,7 +33,7 @@ export class QuestionnaireComponent implements OnInit {
     private globalValidator: GlobalValidator,
     private allowEmailValidator: AllowEmailValidator,
     private forbiddenWordsValidator: ForbiddenWordValidator,
-    private store: Store<{ questionnaire: QuestionnaireState}>
+    private store: Store<fromApp.AppState>
   ) {}
 
   ngOnInit() {
