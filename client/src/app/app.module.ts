@@ -5,6 +5,8 @@ import { RouterModule, Routes } from '@angular/router';
 
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
+import { StoreModule } from '@ngrx/store';
+
 import { ReactiveFormsModule } from '@angular/forms';
 import { AuthInterceptorService } from './services/auth-interceptor.service';
 import { FormStatusDirective } from './directives/form-status.directive';
@@ -17,6 +19,8 @@ import { SuccessMessageComponent } from './components/success-message/success-me
 import { ListGuardService } from './modules/list/components/services/list-guard.service';
 import { DirectivesDirective } from './directives.directive';
 import { ModalComponent } from './components/share/modal/modal.component';
+
+import { questionnaireReducer } from './store/reducers/Questionnaire.reducer';
 
 const appRoutes: Routes = [
   { path: '', component: QuestionnaireComponent, pathMatch: 'full' },
@@ -47,7 +51,8 @@ const appRoutes: Routes = [
     NgbModule,
     HttpClientModule,
     ReactiveFormsModule,
-    RouterModule.forRoot(appRoutes)
+    RouterModule.forRoot(appRoutes),
+    StoreModule.forRoot({questionnaire: questionnaireReducer}),
   ],
   providers: [
     {
