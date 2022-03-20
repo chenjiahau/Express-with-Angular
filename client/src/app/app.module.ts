@@ -26,12 +26,12 @@ const appRoutes: Routes = [
   { path: '', component: QuestionnaireComponent, pathMatch: 'full' },
   {
     path: 'success',
-    // canActivate: [SuccessGuardService],
+    canActivate: [SuccessGuardService],
     component: SuccessMessageComponent,
   },
   {
     path: 'list',
-    // canLoad: [ListGuardService],
+    canLoad: [ListGuardService],
     loadChildren: () =>
       import('./modules/list/list.module').then(m => m.ListModule)
   }

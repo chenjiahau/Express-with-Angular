@@ -1,16 +1,22 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { Store } from '@ngrx/store';
 
 import { ListService } from '../../../services/list.service';
+import { ListGuardService } from '../../../modules/list/components/services/list-guard.service';
 import { GlobalValidator } from '../../../validators/global.validator';
 import { AllowEmailValidator } from '../../../validators/allow-email.validator';
 import { ForbiddenWordValidator } from '../../../validators/forbidden-word.validator';
 
+import { QuestionnaireState } from '../../../store/reducers/Questionnaire.reducer';
+import * as QuestionnaireActions from '../../../store/actions/Questionnaire.action';
+
 @Component({
   selector: 'app-questionnaire',
   templateUrl: './questionnaire.component.html',
-  styleUrls: ['./questionnaire.component.css']
+  styleUrls: ['./questionnaire.component.css'],
+  providers: [ListService]
 })
 export class QuestionnaireComponent implements OnInit {
   successMessage: string;
@@ -23,9 +29,11 @@ export class QuestionnaireComponent implements OnInit {
   constructor(
     private router: Router,
     private listService: ListService,
+    private listGuardService: ListGuardService,
     private globalValidator: GlobalValidator,
     private allowEmailValidator: AllowEmailValidator,
-    private forbiddenWordsValidator: ForbiddenWordValidator
+    private forbiddenWordsValidator: ForbiddenWordValidator,
+    private store: Store<{ questionnaire: QuestionnaireState}>
   ) {}
 
   ngOnInit() {
@@ -88,6 +96,13 @@ export class QuestionnaireComponent implements OnInit {
       title: null,
       content: null
     }
+
+    this.store.select('questionnaire')
+      .subscribe(
+        (subscriber) => {
+          this.listGuardService.hasJoined.next(subscriber.hasJoined);
+        }
+      )
   }
 
   get email() {
@@ -126,7 +141,7 @@ export class QuestionnaireComponent implements OnInit {
     this.successMessage = "";
     this.errorMessage = "";
 
-    const postData = {
+    const questionnaire = {
       id: null,
       email: this.questionnaireForm.value.email,
       firstname: this.questionnaireForm.value.username.firstname,
@@ -136,9 +151,12 @@ export class QuestionnaireComponent implements OnInit {
       aboutyou: this.questionnaireForm.value.aboutyou
     }
 
-    this.listService.add(postData)
+    this.listService.add(questionnaire)
       .subscribe(
         (res) => {
+          this.store.dispatch(new QuestionnaireActions.AddQuestionnaire(questionnaire));
+          this.store.dispatch(new QuestionnaireActions.SetHasJoined(true));
+
           this.successMessage = res.message;
           this.questionnaireForm.reset();
           this.questionnaireForm.patchValue({

@@ -1,34 +1,36 @@
 import { Component, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
-import { Observable } from 'rxjs';
-import { subscribeOn } from 'rxjs/operators';
 
-import { ListService } from 'src/app/services/list.service';
+import { ListService } from '../../../../services/list.service';
+import { QuestionnaireState } from '../../../../store/reducers/Questionnaire.reducer';
+import * as QuestionnaireActions from '../../../../store/actions/Questionnaire.action';
 import { Questionnaire } from '../../../../models/Questionnaire.model';
 
 @Component({
   selector: 'app-list',
   templateUrl: './list.component.html',
-  styleUrls: ['./list.component.css']
+  styleUrls: ['./list.component.css'],
+  providers: [ListService]
 })
 export class ListComponent implements OnInit {
   questionnaireList: Questionnaire[];
-  postList: Questionnaire[];
 
   constructor(
     private listService: ListService,
-    private store: Store<{ questionnaire: { list: Questionnaire[] }}>
+    private store: Store<{ questionnaire: QuestionnaireState}>
   ) { }
 
   ngOnInit(): void {
+    this.store.select('questionnaire')
+      .subscribe(
+        (subscriber) => {
+          this.questionnaireList = subscriber.list;
+        }
+      );
+
     this.listService.fetch()
-      .subscribe(res => {
-        this.store.select('questionnaire')
-          .subscribe(
-            (subscriber) => {
-              this.questionnaireList = subscriber.list;
-            }
-          )
+      .subscribe(questionnaireList => {
+        this.store.dispatch(new QuestionnaireActions.GetQuestionnaire(questionnaireList));
       })
   }
 }

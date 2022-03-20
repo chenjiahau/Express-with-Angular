@@ -1,21 +1,15 @@
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { BehaviorSubject, Observable } from 'rxjs';
+import { Observable } from 'rxjs';
 import { pluck, tap } from 'rxjs/operators';
-import { Store } from '@ngrx/store';
 
 import { Questionnaire } from '../models/Questionnaire.model';
-import * as QuestionnaireActions from '../store/actions/Questionnaire.action';
 
-@Injectable({
-  providedIn: 'root'
-})
+@Injectable()
 export class ListService {
-  hasJoined = new BehaviorSubject(false);
 
   constructor(
     private http: HttpClient,
-    private store: Store<{ questionnaire: { list: Questionnaire[] }}>
   ) { }
 
   fetch(): Observable<any> {
@@ -23,7 +17,7 @@ export class ListService {
     queryString = queryString.append('time', '1')
 
     return this.http
-      .get(
+      .get<Questionnaire[]>(
         '/api/questionnaire',
         {
           headers: new HttpHeaders({
@@ -36,9 +30,10 @@ export class ListService {
       .pipe(
         pluck('list'),
         tap(items => {
-          const postList: Questionnaire[] = [];
-          items.map((item: Questionnaire) => postList.push(item));
-          this.store.dispatch(new QuestionnaireActions.GetQuestionnaire(postList));
+          const questionnaireList: Questionnaire[] = [];
+          items.map((item: Questionnaire) => questionnaireList.push(item));
+
+          return questionnaireList;
         })
       )
   }
@@ -57,12 +52,6 @@ export class ListService {
           }),
           params: queryString
         }
-      )
-      .pipe(
-        tap(() => {
-          this.store.dispatch(new QuestionnaireActions.AddQuestionnaire(postData));
-          this.hasJoined.next(true);
-        })
       )
   }
 }

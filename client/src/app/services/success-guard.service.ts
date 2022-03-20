@@ -1,9 +1,9 @@
 import { Injectable } from "@angular/core";
-import { ActivatedRouteSnapshot, CanActivate, CanLoad, Route, Router, RouterStateSnapshot, UrlSegment, UrlTree } from "@angular/router";
+import { ActivatedRouteSnapshot, CanActivate, Router, RouterStateSnapshot, UrlSegment, UrlTree } from "@angular/router";
 import { Observable } from "rxjs";
-import { take, tap } from "rxjs/operators";
+import { tap } from "rxjs/operators";
 
-import { ListService } from "./list.service";
+import { ListGuardService } from "../modules/list/components/services/list-guard.service";
 
 @Injectable({
   providedIn: 'root'
@@ -11,14 +11,13 @@ import { ListService } from "./list.service";
 export class SuccessGuardService implements CanActivate {
   constructor(
     private router: Router,
-    private listService: ListService
+    private listGuardervice: ListGuardService
   ) { }
 
   canActivate(
     route: ActivatedRouteSnapshot,
     state: RouterStateSnapshot):  Observable<boolean> | Promise<boolean> | boolean {
-
-      return this.listService.hasJoined.pipe(
+      return this.listGuardervice.hasJoined.pipe(
         tap((value) => {
           if (!value)
             this.router.navigate(['/']);

@@ -13,4 +13,10 @@ export class AddQuestionnaire implements Action {
   constructor(public payload: Questionnaire) {}
 }
 
-export type QuestionnaireActions = GetQuestionnaire | AddQuestionnaire;
+export const SET_HASJOINED = 'SET_HASJOINED'
+export class SetHasJoined implements Action {
+  readonly type = SET_HASJOINED;
+  constructor(public payload: boolean) {}
+}
+
+export type QuestionnaireActions = GetQuestionnaire | AddQuestionnaire | SetHasJoined;

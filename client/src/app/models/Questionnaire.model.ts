@@ -1,4 +1,4 @@
-export interface IQuestionnaire {
+export interface Questionnaire {
   id: number;
   email: string;
   firstname: string;
@@ -8,7 +8,7 @@ export interface IQuestionnaire {
   aboutyou: string;
 };
 
-export class Questionnaire implements IQuestionnaire{
+export class Questionnaire implements Questionnaire{
   constructor(
     public id: number,
     public email: string,
