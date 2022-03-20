@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { Questionnaire } from 'src/app/models/Questionnaire.model';
 
-import { IPost, ListService } from 'src/app/services/list.service';
+import { ListService } from 'src/app/services/list.service';
 
 @Component({
   selector: 'app-list',
@@ -8,7 +9,7 @@ import { IPost, ListService } from 'src/app/services/list.service';
   styleUrls: ['./list.component.css']
 })
 export class ListComponent implements OnInit {
-  postList: IPost[];
+  postList: Questionnaire[];
 
   constructor(
     private listService: ListService,

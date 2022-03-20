@@ -3,15 +3,7 @@ import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { pluck, tap } from 'rxjs/operators';
 
-export interface IPost {
-  id: number;
-  email: string;
-  firstname: string;
-  lastname: string;
-  gender: string;
-  age: string;
-  aboutyou: string;
-};
+import { Questionnaire } from '../models/Questionnaire.model';
 
 @Injectable({
   providedIn: 'root'
@@ -26,7 +18,7 @@ export class ListService {
     queryString = queryString.append('time', '1')
 
     return this.http
-      .get<{ list: IPost[] }>(
+      .get<{ list: Questionnaire[] }>(
         '/api/questionnaire',
         {
           headers: new HttpHeaders({
@@ -39,15 +31,15 @@ export class ListService {
       .pipe(
         pluck('list'),
         tap(items => {
-          const postList: IPost[] = [];
-          items.map((item: IPost) => postList.push(item));
+          const postList: Questionnaire[] = [];
+          items.map((item: Questionnaire) => postList.push(item));
 
           return postList;
         })
       )
   }
 
-  add(postData: IPost): Observable<any> {
+  add(postData: Questionnaire): Observable<any> {
     let queryString = new HttpParams().set('action', 'post');
     queryString = queryString.append('time', '2')
  
