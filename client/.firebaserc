@@ -1,0 +1,11 @@
+{
+  "targets": {
+    "onlinecourses-20220831": {
+      "hosting": {
+        "client": [
+          "onlinecourses-20220831"
+        ]
+      }
+    }
+  }
+}
